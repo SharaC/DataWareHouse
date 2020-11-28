@@ -1,0 +1,16 @@
+.img-table {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.avatar-pic {
+  width: 100px;
+}
+
+.acciones:hover {
+  display: none;
+}
+
+.accionesHover {
+  /* display: none; */
+}

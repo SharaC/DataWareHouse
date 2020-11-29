@@ -53,24 +53,19 @@ const editarCompania = (req, res) => {
 
 const eliminarCompania = (req, res) => {
     let id = req.params.id;
-    let id_rol = req.id_rol;
-    if (id_rol === 1){
-        conexion.query(`DELETE from compania WHERE id=${id};`,
+    conexion.query(`DELETE from compania WHERE id=${id};`,
         {
             type: conexion.QueryTypes.UPDATE
         }).then(result => {
-            result[1] === 0 ? res.status(400).json("los parametros enviados para eliminar no son correctos, ningún producto se eliminó") :
-            res.status(200).json("Producto con id: "+id+" fue ELIMINADO correctamente");
+            result[1] === 0 ? res.status(400).json("los parametros enviados para eliminar no son correctos, ninguna compañía se eliminó") :
+            res.status(200).json("La compañía con id: "+id+" fue ELIMINADA correctamente");
         }).catch(err => {
             if (err.parent.errno === 1451) {
-                res.status(409).json("El producto no puede ser eliminado por que está relacionado con un pedido en la tabla detalles_pedidos");
+                res.status(409).json("La compañía no puede ser eliminada por que está relacionada con un contacto en la tabla contactos");
             }else{
               res.status(500).json(err);
             }
         });
-    } else {
-        res.status(403).json("el usuario no tiene permisos para eliminar productos")
-    }
     
 }
 

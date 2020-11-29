@@ -1,4 +1,5 @@
 node_modules
+src/startup/config.js
 
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,windows,macos,node,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,windows,macos,node,git

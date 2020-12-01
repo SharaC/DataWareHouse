@@ -14,3 +14,32 @@
 .accionesHover {
   /* display: none; */
 }
+
+#loginCard {
+  height: 320px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 400px;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+#registerCard {
+  height: 500px;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 600px;
+  background-color: rgba(0, 0, 0, 0.2) !important;
+}
+
+.input-group-prepend span {
+  width: 50px;
+  background-color: green;
+  color: white;
+  border: 0 !important;
+}
+
+.login_btn {
+  color: black;
+  background-color: green;
+  width: 100px;
+}

@@ -1,7 +1,10 @@
 const conexion = require('../../startup/conexion');
 
 const listarTodo = (req, res) => {
-    conexion.query(`SELECT * FROM regiones;`,
+    conexion.query(`Select CIU.nombre AS Nombre_ciudad, PAI.nombre AS Nombre_pais, REG.nombre AS Nombre_region FROM ciudades CIU
+    INNER JOIN paises PAI ON PAI.id = CIU.id_paises
+    INNER JOIN regiones REG ON REG.id = PAI.id_region
+    ORDER BY REG.nombre, PAI.nombre , CIU.nombre;`,
     {
         type: conexion.QueryTypes.SELECT
     }).then(result => {

@@ -18,7 +18,8 @@ class Server {
 
         this.app.use(helmet.permittedCrossDomainPolicies({permittedPolicies: "by-content-type"}));
         this.app.use(function(req, res, next) {
-            res.header("Access-Control-Allow-Origin", "http://localhost");
+            res.header("Access-Control-Allow-Origin", "http://localhost:5500");
+            res.header("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
             res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
             res.header("Access-Control-Allow-Methods", "POST, GET");
             next();
@@ -28,7 +29,7 @@ class Server {
         this.app.use(`${config.apiVersion}/usuarios`, routerUsuarios);
         //this.app.use(`${config.apiVersion}/contactos`, routerContactos);
         //this.app.use(`${config.apiVersion}/companias`, routerCompanias);
-        //this.app.use(`${config.apiVersion}/localizacion`, routerLocalizacion);
+        this.app.use(`${config.apiVersion}/localizacion`, routerLocalizacion);
     }
 
     runServer(){

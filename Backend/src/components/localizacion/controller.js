@@ -1,5 +1,16 @@
 const conexion = require('../../startup/conexion');
 
+const listarTodo = (req, res) => {
+    conexion.query(`SELECT * FROM regiones;`,
+    {
+        type: conexion.QueryTypes.SELECT
+    }).then(result => {
+        result.length === 0 ? res.status(404).json("no se encontró ninguna region") : res.status(200).json(result);
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+}
+
 const listarRegiones = (req, res) => {
     conexion.query(`SELECT * FROM regiones;`,
     {
@@ -210,7 +221,7 @@ const eliminarCiudad = (req, res) => {
 }
 
 module.exports = {
-    listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
+    listarTodo, listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
     listarPaises, listarPaisID, crearPais, editarPais, eliminarPais,
     listarCiudades, listarCiudadID, crearCiudad, editarCiudad, eliminarCiudad
 }

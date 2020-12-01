@@ -7,7 +7,9 @@ const autenticarUsuario = (req, res) => {
         replacements: [username],
         type:conexion.QueryTypes.SELECT
     }).then((result)=> {
-        if (user === result[0].username && password === result[0].password){
+        if (result.length === 0) {
+            res.status(401).json("Usuario o contraseña inválidos");
+        }else if (username === result[0].username && password === result[0].password) {
             const payload = {
                 usuario: result[0].username,
                 id_usuario : result[0].id,
@@ -19,6 +21,7 @@ const autenticarUsuario = (req, res) => {
             res.status(401).json("Usuario o contraseña inválidos");
         }
     }).catch(err => {
+        console.log(err);
         res.status(500).json(err);
     })
 };
@@ -28,7 +31,7 @@ const registrarUsuario = (req, res) => {
     const id_rol = 2;
     conexion.query("INSERT INTO `usuarios` (`username`,`password`,`nombre_completo`,`email`,`id_perfil`) VALUES (?,?,?,?,?);",
     {
-        replacements: [username, password, password, nombre_completo, email, id_perfil],
+        replacements: [username, password, nombre_completo, email, id_perfil],
         type: conexion.QueryTypes.INSERT
     }).then(result => {
         res.status(200).json("usuario creado con éxito, id: " + result[0]);

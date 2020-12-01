@@ -1,28 +1,30 @@
 const router = require('express').Router();
 const { validarToken } = require('../../middlewares/token/jwt');
 const { 
-    listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
+    listarTodo, listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
     listarPaises, listarPaisID, crearPais, editarPais, eliminarPais,
     listarCiudades, listarCiudadID, crearCiudad, editarCiudad, eliminarCiudad
 } = require('./controller');
 
-router.get('/', validarToken, listarRegiones);
-router.get('/producto/:id', validarToken, listarRegionID);
-router.post('/nuevo-producto', validarToken, crearRegion);
-router.put('/producto', validarToken, editarRegion);
-router.delete('/producto/:id/confirm-delete', validarToken, eliminarRegion);
+router.get('/todo-ciudades', validarToken, listarTodo);
 
-router.get('/', validarToken, listarPaises);
-router.get('/producto/:id', validarToken, listarPaisID);
-router.post('/nuevo-producto', validarToken, crearPais);
-router.put('/producto', validarToken, editarPais);
-router.delete('/producto/:id/confirm-delete', validarToken, eliminarPais);
+router.get('/regiones', validarToken, listarRegiones);
+router.get('/region/:id', validarToken, listarRegionID);
+router.post('/nueva-region', validarToken, crearRegion);
+router.put('/region', validarToken, editarRegion);
+router.delete('/region/:id/confirm-delete', validarToken, eliminarRegion);
 
-router.get('/', validarToken, listarCiudades);
-router.get('/producto/:id', validarToken, listarCiudadID);
-router.post('/nuevo-producto', validarToken, crearCiudad);
-router.put('/producto', validarToken, editarCiudad);
-router.delete('/producto/:id/confirm-delete', validarToken, eliminarCiudad);
+router.get('/paises', validarToken, listarPaises);
+router.get('/pais/:id', validarToken, listarPaisID);
+router.post('/nuevo-pais', validarToken, crearPais);
+router.put('/pais', validarToken, editarPais);
+router.delete('/pais/:id/confirm-delete', validarToken, eliminarPais);
+
+router.get('/ciudades', validarToken, listarCiudades);
+router.get('/ciudades/:id', validarToken, listarCiudadID);
+router.post('/nueva-ciudad', validarToken, crearCiudad);
+router.put('/ciudad', validarToken, editarCiudad);
+router.delete('/ciudad/:id/confirm-delete', validarToken, eliminarCiudad);
 
 
 module.exports = router;

@@ -17,7 +17,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="col">
-                    <button id="btnAgregarRegion" class="btn btn-success col-md-8 offset-md-2 d-block"
+                    <button id="btnAgregarRegion" class="btn btn-primary col-md-8 offset-md-2 d-block"
                         onclick="agregarRegion()">Agregar Nueva Región</button>
                     <div id="div-nuevaRegion" class="nonvisible row border p-2">
                         <input id="nombreRegion" class="form-control" type="text" placeholder="Nombre Nueva Region">
@@ -26,7 +26,7 @@
                                 onclick="guardarRegion()">GUARDAR</button>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <button id="btnCancelarRegion" class="btn btn-success d-block"
+                            <button id="btnCancelarRegion" class="btn btn-danger d-block"
                                 onclick="cancelarRegion()">CANCELAR</button>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-4">
                 <div class="col">
-                    <button id="btnAgregarPais" class="btn btn-success col-md-8 offset-md-2 d-block"
+                    <button id="btnAgregarPais" class="btn btn-primary col-md-8 offset-md-2 d-block"
                         onclick="agregarPais()">Agregar Nuevo País</button>
 
                     <div id="divNuevoPais" class="nonvisible row border p-2">
@@ -46,7 +46,7 @@
                             <button id="btnGuardarPais" class="btn btn-success" onclick="guardarPais()">GUARDAR</button>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <button id="btnCancelarPais" class="btn btn-success"
+                            <button id="btnCancelarPais" class="btn btn-danger"
                                 onclick="cancelarPais()">CANCELAR</button>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
             </div>
             <div class="col-md-4">
                 <div class="col">
-                    <button id="btnAgregarCiudad" class="btn btn-success col-md-8 offset-md-2 d-block"
+                    <button id="btnAgregarCiudad" class="btn btn-primary col-md-8 offset-md-2 d-block"
                         onclick="agregarCiudad()">Agregar Nueva Ciudad</button>
 
                     <div id="divNuevaCiudad" class="nonvisible row border p-2">
@@ -71,7 +71,7 @@
                                 onclick="guardarCiudad()">GUARDAR</button>
                         </div>
                         <div class="col-md-6 mt-2">
-                            <button id="btnCancelarCiudad" class="btn btn-success"
+                            <button id="btnCancelarCiudad" class="btn btn-danger"
                                 onclick="cancelarCiudad()">CANCELAR</button>
                         </div>
                     </div>
@@ -80,7 +80,8 @@
         </div>
     </div>
 
-
+    <div id="modal-edit">
+    </div>
 
     <section id="listaRegiones">
         <div class="container">

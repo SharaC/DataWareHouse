@@ -138,10 +138,10 @@ const crearPais = (req, res) => {
 }
 
 const editarPais = (req, res) => {
-    let {id, nombre,id_region} = req.body;
-    conexion.query(`UPDATE paises SET nombre=?, id_region=? WHERE id=?;`,
+    let {id, nombre} = req.body;
+    conexion.query(`UPDATE paises SET nombre=? WHERE id=?;`,
     {
-        replacements: [nombre,id_region, id],
+        replacements: [nombre, id],
         type: conexion.QueryTypes.UPDATE
     }).then(result => {
         result[1] === 0 ? res.status(400).json("los parametros enviados para actualizar no son correctos, ningún país se actualizó") : 
@@ -208,11 +208,11 @@ const crearCiudad = (req, res) => {
 }
 
 const editarCiudad = (req, res) => {
-    let {id, nombre,id_paises} = req.body;
+    let {id, nombre} = req.body;
     console.log(id);
-    conexion.query(`UPDATE ciudades SET nombre=?, id_paises=? WHERE id=?;`,
+    conexion.query(`UPDATE ciudades SET nombre=?WHERE id=?;`,
     {
-        replacements: [nombre,id_paises, id],
+        replacements: [nombre, id],
         type: conexion.QueryTypes.UPDATE
     }).then(result => {
         result[1] === 0 ? res.status(400).json("los parametros enviados para actualizar no son correctos, ninguna ciudad se actualizó") : 

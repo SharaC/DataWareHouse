@@ -1,7 +1,10 @@
 const conexion = require('../../startup/conexion');
 
 const listarTodo = (req, res) => {
-    conexion.query(`Select CIU.nombre AS Nombre_ciudad, PAI.nombre AS Nombre_pais, REG.nombre AS Nombre_region FROM ciudades CIU
+    conexion.query(`Select CIU.id AS id_ciudad, CIU.nombre AS Nombre_ciudad, 
+    PAI.id AS id_pais, PAI.nombre AS Nombre_pais, 
+    REG.id AS id_region, REG.nombre AS Nombre_region 
+    FROM ciudades CIU
     INNER JOIN paises PAI ON PAI.id = CIU.id_paises
     INNER JOIN regiones REG ON REG.id = PAI.id_region
     ORDER BY REG.nombre, PAI.nombre , CIU.nombre;`,
@@ -40,6 +43,7 @@ const listarRegionID = (req, res) => {
 
 const crearRegion = (req, res) => {
     let {nombre} = req.body;
+    console.log(nombre);
     conexion.query("INSERT INTO `regiones` (`nombre`) VALUES (?);",
     {
         replacements: [nombre],
@@ -97,6 +101,19 @@ const listarPaises = (req, res) => {
 const listarPaisID = (req, res) => {
     let id = req.params.id;
     conexion.query(`SELECT * FROM paises WHERE id= ?`,
+    {
+        replacements: [id],
+        type: conexion.QueryTypes.SELECT
+    }).then(result => {
+        result.length === 0 ? res.status(404).json("no se encontró el producto solicitado") : res.status(200).json(result);
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+}
+
+const listarPaisPorRegion = (req, res) => {
+    let id = req.params.id;
+    conexion.query(`SELECT * FROM paises WHERE id_region= ?`,
     {
         replacements: [id],
         type: conexion.QueryTypes.SELECT
@@ -225,6 +242,6 @@ const eliminarCiudad = (req, res) => {
 
 module.exports = {
     listarTodo, listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
-    listarPaises, listarPaisID, crearPais, editarPais, eliminarPais,
+    listarPaises, listarPaisID, listarPaisPorRegion, crearPais, editarPais, eliminarPais,
     listarCiudades, listarCiudadID, crearCiudad, editarCiudad, eliminarCiudad
 }

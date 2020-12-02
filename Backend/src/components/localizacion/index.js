@@ -2,7 +2,7 @@ const router = require('express').Router();
 const { validarToken } = require('../../middlewares/token/jwt');
 const { 
     listarTodo, listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
-    listarPaises, listarPaisID, crearPais, editarPais, eliminarPais,
+    listarPaises, listarPaisID, listarPaisPorRegion, crearPais, editarPais, eliminarPais,
     listarCiudades, listarCiudadID, crearCiudad, editarCiudad, eliminarCiudad
 } = require('./controller');
 
@@ -16,6 +16,7 @@ router.delete('/region/:id/confirm-delete', validarToken, eliminarRegion);
 
 router.get('/paises', validarToken, listarPaises);
 router.get('/pais/:id', validarToken, listarPaisID);
+router.get('/pais-region/:id', validarToken, listarPaisPorRegion);
 router.post('/nuevo-pais', validarToken, crearPais);
 router.put('/pais', validarToken, editarPais);
 router.delete('/pais/:id/confirm-delete', validarToken, eliminarPais);

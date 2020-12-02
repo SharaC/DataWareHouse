@@ -1,3 +1,7 @@
+.nonvisible {
+  display: none !important;
+}
+
 .img-table {
   width: 50px;
   border-radius: 50%;

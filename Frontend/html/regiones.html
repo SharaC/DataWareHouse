@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Region/Ciudad</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="col">
+                    <button id="btnAgregarRegion" class="btn btn-success col-md-8 offset-md-2 d-block"
+                        onclick="agregarRegion()">Agregar Nueva Región</button>
+                    <div id="div-nuevaRegion" class="nonvisible row border p-2">
+                        <input id="nombreRegion" class="form-control" type="text" placeholder="Nombre Nueva Region">
+                        <div class="col-md-6 mt-2">
+                            <button id="btnGuardarRegion" class="btn btn-success d-block"
+                                onclick="guardarRegion()">GUARDAR</button>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <button id="btnCancelarRegion" class="btn btn-success d-block"
+                                onclick="cancelarRegion()">CANCELAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col">
+                    <button id="btnAgregarPais" class="btn btn-success col-md-8 offset-md-2 d-block"
+                        onclick="agregarPais()">Agregar Nuevo País</button>
+
+                    <div id="divNuevoPais" class="nonvisible row border p-2">
+                        <input id="nombrePais" class="form-control" type="text" placeholder="Nombre Nuevo País">
+                        <select name="regionPais" class="form-control mt-2" id="selRegionPais" required>
+                            <option value="0" disabled selected>Seleccione la región</option>
+                        </select>
+                        <div class="col-md-6 mt-2">
+                            <button id="btnGuardarPais" class="btn btn-success" onclick="guardarPais()">GUARDAR</button>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <button id="btnCancelarPais" class="btn btn-success"
+                                onclick="cancelarPais()">CANCELAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="col">
+                    <button id="btnAgregarCiudad" class="btn btn-success col-md-8 offset-md-2 d-block"
+                        onclick="agregarCiudad()">Agregar Nueva Ciudad</button>
+
+                    <div id="divNuevaCiudad" class="nonvisible row border p-2">
+                        <input id="nombreCiudad" class="form-control" type="text" placeholder="Nombre Nueva Ciudad">
+                        <select name="regionCiudad" class="form-control mt-2" id="selRegionCiudad"
+                            onchange="listarPaises()" required>
+                            <!-- <option value="0" disabled selected>Seleccione la región</option> -->
+                        </select>
+                        <select name="paisCiudad" class="form-control mt-2" id="selPaisCiudad" required>
+                            <!-- <option value="0" disabled selected>Seleccione el país</option> -->
+                        </select>
+                        <div class="col-md-6 mt-2">
+                            <button id="btnGuardarCiudad" class="btn btn-success"
+                                onclick="guardarCiudad()">GUARDAR</button>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <button id="btnCancelarCiudad" class="btn btn-success"
+                                onclick="cancelarCiudad()">CANCELAR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <section id="listaRegiones">
+        <div class="container">
+            <table id="tbRegiones" class="table display mt-5">
+                <thead class="thead-dark text-center">
+                    <tr>
+                        <th colspan="3" class="border">Region</th>
+                        <th colspan="3" class="border">País</th>
+                        <th colspan="3" class="border">Ciudad</th>
+                    </tr>
+                </thead>
+                <tbody id="rows">
+
+                </tbody>
+                <tfoot>
+                </tfoot>
+            </table>
+        </div>
+    </section>
+    <script src="../js/regiones.js"></script>
+</body>
+
+</html>

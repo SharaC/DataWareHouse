@@ -14,7 +14,7 @@ function login(){
                 response.json().then((data)=>{
                     sessionStorage.setItem("usertoken", data.token);
                 });        
-                location.href = "../Frontend/contactos.html";
+                location.href = "../html/contactos.html";
             }
             else{
                 console.log(response.json);

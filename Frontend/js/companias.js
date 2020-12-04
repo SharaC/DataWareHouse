@@ -309,3 +309,7 @@ function crearCompania(){
         }
     });
 };
+
+function cerrarSesion() {
+    sessionStorage.clear();
+}

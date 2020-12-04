@@ -137,3 +137,7 @@ function eliminarElemento(id_usuario){
         console.log(error);
     });
 }
+
+function cerrarSesion() {
+    sessionStorage.clear();
+}

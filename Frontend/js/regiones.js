@@ -391,3 +391,7 @@ function eliminarElemento(ruta_eliminar){
         console.log(error);
     });
 }
+
+function cerrarSesion() {
+    sessionStorage.clear();
+}

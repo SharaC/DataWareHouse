@@ -312,3 +312,6 @@ function buscarContacto() {
     });
 }
 
+function cerrarSesion() {
+    sessionStorage.clear();
+}

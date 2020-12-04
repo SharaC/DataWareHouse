@@ -113,15 +113,11 @@
                                     alt="example placeholder avatar">
                             </div>
                             <div class="row col">
-                                <div class=" col-md-2 pr-0">
-                                    <label for="nombreContacto">Nombre *</label>
+                                <div class=" col-md-3 pr-0">
+                                    <label for="nombreContacto">Nombre completo *</label>
                                     <input type="text" name="nombre" id="nombreContacto" class="form-control">
-                                </div>
-                                <div class="col-md-2 pr-0">
-                                    <label for="apellidoContacto">Apellido *</label>
-                                    <input type="text" name="apellido" id="apellidoContacto" class="form-control">
-                                </div>
-                                <div class="col-md-2 pr-0">
+                                </div>                                
+                                <div class="col-md-3 pr-0">
                                     <label for="cargoContacto">Cargo *</label>
                                     <input type="text" name="cargo" id="cargoContacto" class="form-control">
                                 </div>
@@ -164,7 +160,7 @@
                             <label for="direccion">Dirección *</label>
                             <input type="text" name="direccion" id="direccion" class="form-control">
                         </div>
-                        <div class="col-md-4 mt-2">
+                        <div class="col-md-2 mt-2">
                             <label for="interes">Interés</label>
                             <select name="interes" id="interes" class="form-control">
                                 <option value="0">0%</option>
@@ -174,11 +170,16 @@
                                 <option value="100">100%</option>
                             </select>
                         </div>
-                        <div class="col-md-4 mt-2">
+                        <div class="col-md-3 mt-2">
                             <label for="interes" class="text-white">Guardar</label>
                             <button id="btnGuardarContacto" type="button" class="btn btn-success btn-block"
                                 onclick="crearContacto()">Guardar
-                                cambios</button>
+                                contacto</button>
+                        </div>
+                        <div class="col-md-3 mt-2">
+                            <label for="interes" class="text-white">Guardar</label>
+                            <button id="btnCancelarContacto" type="button" data-dismiss="modal" class="btn btn-outline-danger btn-block"
+                                >Cerrar</button>
                         </div>
                     </div>
                     <div class="ml-5">

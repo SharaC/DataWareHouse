@@ -17,7 +17,15 @@ const listarContactos = (req, res) => {
 
 const listarContactoID = (req, res) => {
     let id = req.params.id;
-    conexion.query(`SELECT * FROM contactos WHERE id= ?`,
+    conexion.query(`SELECT CON.id, CON.nombre_completo AS Nombre, CON.cargo AS Cargo, CON.email AS Email, 
+                    COMP.id AS id_compania, COMP.nombre AS Compania, CON.direccion AS Direccion, CON.interes AS Interes, 
+                    CIU.id AS id_ciudad, CIU.nombre AS Ciudad, PAI.id AS id_pais, PAI.nombre AS Pais, REG.id AS id_region
+                    FROM contactos CON
+                    INNER JOIN ciudades CIU ON CIU.id = CON.id_ciudad
+                    INNER JOIN paises PAI ON PAI.id = CIU.id_paises
+                    INNER JOIN companias COMP ON COMP.id = CON.id_compania
+                    INNER JOIN regiones REG ON REG.id = PAI.id_region
+                    WHERE CON.id= ?;`,
     {
         replacements: [id],
         type: conexion.QueryTypes.SELECT

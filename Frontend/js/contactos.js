@@ -31,7 +31,7 @@ function listarContactos() {
                                 <td class="text-center">
                                     <div>
                                         <a id="elim-${fila.id}" class="btn btn-danger" data-toggle="modal" data-target="#eliminarContactoIndividual" onclick="modificarModal(${fila.id})"><i class="fas fa-trash-alt"></i></a>
-                                        <a id="edit-${fila.id}" class="btn btn-primary" onclick="editarContacto(${fila.id})"><i class="fas fa-pencil-alt"></i></a>
+                                        <a id="edit-${fila.id}" class="btn btn-primary" data-toggle="modal" data-target="#agregarContacto" onclick="editarContacto(${fila.id})"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>`;
@@ -185,6 +185,44 @@ function guardarCanal(id_canal) {
     }).then(res => {
         res.json().then(data => {
             console.log(data);
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
+function editarContacto(id_contacto){
+    document.getElementById('tituloModalContacto').innerHTML = "Editar Contacto";
+    let nombre = document.getElementById(`nombreContacto`);
+    let apellidoContacto = document.getElementById(`apellidoContacto`);
+    let cargoContacto = document.getElementById(`cargoContacto`);
+    let emailContacto = document.getElementById(`emailContacto`);
+    let companiaContacto = document.getElementById(`companiaContacto`);
+    let regionContacto = document.getElementById(`region`);
+    selectPais = document.getElementById(`pais`);
+    selectCiudad = document.getElementById(`ciudad`);
+    let direccion = document.getElementById(`direccion`);
+    let interes = document.getElementById(`interes`);
+
+    listarCompanias();
+    cargarRegiones();
+
+    fetch(`http://127.0.0.1:3030/v1/contactos/contacto/${id_contacto}`, {
+        method: 'GET',
+        headers: { "Authorization": "Bearer " + jwt}
+    }).then(res => {
+        res.json().then(data => {
+            nombre.value = data[0].Nombre;
+            cargoContacto.value = data[0].Cargo;
+            emailContacto.value = data[0].Email;
+            companiaContacto.value = data[0].id_compania;
+            regionContacto.value = data[0].id_region;
+            cargarPaises();
+            selectPais.value = data[0].id_pais;
+            cargarCiudades();
+            selectCiudad.value = data[0].id_ciudad;       
+            direccion.value = data[0].Direccion;
+            interes.value = data[0].Interes;          
         });
     }).catch(error => {
         console.log(error);

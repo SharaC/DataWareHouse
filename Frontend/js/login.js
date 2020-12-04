@@ -18,6 +18,7 @@ function login(){
             }
             else{
                 console.log(response.json);
+                alert("¡Oops!... Las credenciales ingresadas son incorrectas")
             }
         });
     

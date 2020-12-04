@@ -87,21 +87,23 @@ const editarContacto = (req, res) => {
 
 const eliminarContacto = (req, res) => {
     let id = req.params.id;
-    conexion.query(`DELETE from canales_contacto WHERE id_contacto=${id};
-                    DELETE from contactos WHERE id=${id};`,
+    conexion.query(`DELETE from canales_contacto WHERE id_contacto=${id};`,
         {
-            type: conexion.QueryTypes.UPDATE
-        }).then(result => {
-            result[1] === 0 ? res.status(400).json("los parametros enviados para eliminar no son correctos, ningún contacto se eliminó") :
-            res.status(200).json("El contacto con id: "+id+" fue ELIMINADO correctamente");
+            type: conexion.QueryTypes.DELETE
+        }).then(() => {
+            conexion.query(`DELETE from contactos WHERE id=${id};`,
+            {
+                type: conexion.QueryTypes.DELETE
+            }).then(() => {
+                result[1] === 0 ? res.status(400).json("los parametros enviados para eliminar no son correctos, ningún pedido se eliminó") :
+                res.status(200).json("Pedido con id: "+id+" fue ELIMINADO correctamente");
+            }).catch(err => {
+                res.status(500).json(err);
+            });
         }).catch(err => {
-            if (err.parent.errno === 1451) {
-                res.status(409).json("El contacto no puede ser eliminado por que está relacionado con un pedido en la tabla detalles_pedidos");
-            }else{
-              res.status(500).json(err);
-            }
+            res.status(500).json(err);
         });
-    
+   
 }
 
 const crearCanalContacto = (req, res) => {

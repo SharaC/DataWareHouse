@@ -150,13 +150,14 @@
                         <div class="col-md-4">
                             <label for="pais">País *</label>
                             <select name="pais" id="pais" class="form-control" onchange="cargarCiudades()">
-                                <option value="0" disabled selected>Seleccione un país</option>
+                                <option id="selectPaisDefault" value="0" disabled selected>Seleccione un país</option>
                             </select>
                         </div>
                         <div class="col-md-4">
                             <label for="ciudad">Ciudad *</label>
                             <select name="ciudad" id="ciudad" class="form-control">
-                                <option value="0" disabled selected>Seleccione una ciudad</option>
+                                <option id="selectCiudadDefault" value="0" disabled selected>Seleccione una ciudad
+                                </option>
                             </select>
                         </div>
                         <div class="col-md-4 mt-2">
@@ -177,7 +178,7 @@
                             <label for="interes" class="text-white">Guardar</label>
                             <button id="btnGuardarContacto" type="button" class="btn btn-success btn-block"
                                 onclick="crearContacto()">Guardar
-                                contacto</button>
+                                cambios</button>
                         </div>
                     </div>
                     <div class="ml-5">

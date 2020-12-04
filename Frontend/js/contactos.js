@@ -92,7 +92,8 @@ function crearContacto(){
     }).then(res => {
         res.json().then(data => {
             id_contactoCreado = data;
-            document.getElementById('btnGuardarContacto').setAttribute("disabled",true);
+            //document.getElementById('btnGuardarContacto').setAttribute("disabled",true);
+            alert("los datos de contacto se actualizaron exitosamente");
             document.querySelectorAll("[id^='canal-']").forEach(btn => {
                 btn.removeAttribute("disabled");
             })
@@ -124,6 +125,8 @@ function listarCompanias() {
 let selectRegion = document.getElementById("region");
 let selectPais = document.getElementById("pais");
 let selectCiudad = document.getElementById("ciudad");
+let optionSelectPais = document.getElementById(`selectPaisDefault`);
+let optionSelectCiudad = document.getElementById(`selectCiudadDefault`);
 
 function cargarRegiones() {
     fetch('http://127.0.0.1:3030/v1/localizacion/regiones', {
@@ -147,6 +150,14 @@ function cargarPaises() {
         headers: { "Authorization": "Bearer " + jwt }
     }).then(res => {
         res.json().then(data => {
+            selectPais.innerHTML=`<select name="pais" id="pais" class="form-control">
+                                        <option id="selectCiudadDefault" value="0" disabled selected>Seleccione un país
+                                        </option>
+                                    </select>`;
+            selectCiudad.innerHTML=`<select name="ciudad" id="ciudad" class="form-control">
+                                        <option id="selectCiudadDefault" value="0" disabled selected>Seleccione una ciudad
+                                        </option>
+                                    </select>`;
             data.forEach(pais =>{
                 plantilla = `<option value="${pais.id}">${pais.nombre}</option>`;
                 selectPais.insertAdjacentHTML("beforeend",plantilla);
@@ -163,6 +174,10 @@ function cargarCiudades() {
         headers: { "Authorization": "Bearer " + jwt }
     }).then(res => {
         res.json().then(data => {
+            selectCiudad.innerHTML=`<select name="ciudad" id="ciudad" class="form-control">
+                                        <option id="selectCiudadDefault" value="0" disabled selected>Seleccione una ciudad
+                                        </option>
+                                    </select>`;
             data.forEach(ciudad =>{
                 plantilla = `<option value="${ciudad.id}">${ciudad.nombre}</option>`;
                 selectCiudad.insertAdjacentHTML("beforeend",plantilla);
@@ -198,9 +213,7 @@ function editarContacto(id_contacto){
     let cargoContacto = document.getElementById(`cargoContacto`);
     let emailContacto = document.getElementById(`emailContacto`);
     let companiaContacto = document.getElementById(`companiaContacto`);
-    let regionContacto = document.getElementById(`region`);
-    selectPais = document.getElementById(`pais`);
-    selectCiudad = document.getElementById(`ciudad`);
+    selectRegion = document.getElementById(`region`);
     let direccion = document.getElementById(`direccion`);
     let interes = document.getElementById(`interes`);
 
@@ -216,11 +229,11 @@ function editarContacto(id_contacto){
             cargoContacto.value = data[0].Cargo;
             emailContacto.value = data[0].Email;
             companiaContacto.value = data[0].id_compania;
-            regionContacto.value = data[0].id_region;
-            cargarPaises();
-            selectPais.value = data[0].id_pais;
-            cargarCiudades();
-            selectCiudad.value = data[0].id_ciudad;       
+            selectRegion.value = data[0].id_region;
+            optionSelectPais.innerHTML = data[0].Pais;
+            optionSelectPais.value = data[0].id_pais; 
+            optionSelectCiudad.innerHTML = data[0].Ciudad;
+            optionSelectCiudad.value = data[0].id_ciudad;      
             direccion.value = data[0].Direccion;
             interes.value = data[0].Interes;          
         });

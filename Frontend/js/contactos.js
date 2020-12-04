@@ -21,14 +21,16 @@ function listarContactos() {
                                 <td>${fila.Cargo}</td>
                                 <td>
                                     <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width:${fila.Interes}%"
-                                            aria-valuenow="${fila.Interes}" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-warning" role="progressbar" style="width:${fila.Interes}%"
+                                            aria-valuenow="${fila.Interes}" aria-valuemin="0" aria-valuemax="100">
+                                        </div>
                                     </div>
+                                    <label>${fila.Interes}%</label>
                                 </td>
                                 <td class="text-center">
                                     <div>
-                                        <i class="fas fa-trash-alt"></i>
-                                        <i class="fas fa-pencil-alt"></i>
+                                        <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                                        <a class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>`;

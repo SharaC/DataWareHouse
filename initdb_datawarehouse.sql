@@ -180,7 +180,7 @@ CREATE TABLE `canales_contacto` (
   KEY `fk_preferencia` (`preferencia`),
   KEY `fk_canal` (`id_canal`),
   CONSTRAINT `fk_canal` FOREIGN KEY (`id_canal`) REFERENCES `canales` (`id`),
-  CONSTRAINT `fk_contacto_canal` FOREIGN KEY (`id_contacto`) REFERENCES `contactos` (`id`),
+  CONSTRAINT `fk_contacto_canal` FOREIGN KEY (`id_contacto`) REFERENCES `contactos` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_preferencia` FOREIGN KEY (`preferencia`) REFERENCES `preferencias` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

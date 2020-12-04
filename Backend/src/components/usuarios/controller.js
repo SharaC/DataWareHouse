@@ -54,8 +54,14 @@ const listarUsuarios = (req, res) => {
 };
 
 const actualizarUsuario = (req, res) => {
-    let {id, username,nombre_completo,email,id_perfil} = req.body;
-    conexion.query(`UPDATE usuarios SET username=?, nombre_completo=?, email=?, id_perfil=? WHERE id=?;`,
+    let {id, username,nombre_completo,email,id_perfil,password} = req.body;
+    let query_actualizar;
+    if (password === "") {
+        query_actualizar = `UPDATE usuarios SET username=?, nombre_completo=?, email=?, id_perfil=? WHERE id=?;`
+    } else {
+        query_actualizar = `UPDATE usuarios SET username=?, nombre_completo=?, email=?, id_perfil=?, password='${password}' WHERE id=?;`
+    }
+    conexion.query(query_actualizar,
     {
         replacements: [username,nombre_completo,email,id_perfil, id],
         type: conexion.QueryTypes.UPDATE

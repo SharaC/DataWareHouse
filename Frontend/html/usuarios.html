@@ -18,13 +18,16 @@
             <nav class="col-12 navbar navbar-expand-lg navbar-light bg-dark">
                 <img src="../assets/logo.png" class="logo" alt="img-logo">
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
-                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-item nonvisible">
+                            <a class="nav-link" href="../html/usuarios.html">Usuarios</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../html/contactos.html">Contactos</a>
                         </li>
@@ -32,10 +35,11 @@
                             <a class="nav-link" href="../html/companias.html">Compañías</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../html/usuarios.html">Usuarios</a>
+                            <a class="nav-link" href="../html/regiones.html">Región / Ciudad</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../html/regiones.html">Región / Ciudad</a>
+                            <a type="button" class="btn btn-light" href="../html/login.html"
+                                onclick="cerrarSesion()">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -161,6 +165,7 @@
                         <th class="border">Nombre</th>
                         <th class="border">Email</th>
                         <th class="border">Rol</th>
+                        <th class="border">Contraseña</th>
                         <th colspan="2" class="border">Acciones</th>
                     </tr>
                 </thead>

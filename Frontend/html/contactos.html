@@ -116,7 +116,7 @@
                                 <div class=" col-md-3 pr-0">
                                     <label for="nombreContacto">Nombre completo *</label>
                                     <input type="text" name="nombre" id="nombreContacto" class="form-control">
-                                </div>                                
+                                </div>
                                 <div class="col-md-3 pr-0">
                                     <label for="cargoContacto">Cargo *</label>
                                     <input type="text" name="cargo" id="cargoContacto" class="form-control">
@@ -170,19 +170,24 @@
                                 <option value="100">100%</option>
                             </select>
                         </div>
-                        <div class="col-md-3 mt-2">
+                        <div id="guardarCrearContacto" class="col-md-3 mt-2">
                             <label for="interes" class="text-white">Guardar</label>
                             <button id="btnGuardarContacto" type="button" class="btn btn-success btn-block"
                                 onclick="crearContacto()">Guardar
                                 contacto</button>
                         </div>
+                        <div id="guardarEdicion" class="col-md-3 mt-2 nonvisible">
+                            <label for="interes" class="text-white">Guardar</label>
+                            <button id="btnGuardarEditContacto" type="button" class="btn btn-success btn-block">Guardar
+                                cambios</button>
+                        </div>
                         <div class="col-md-3 mt-2">
                             <label for="interes" class="text-white">Guardar</label>
-                            <button id="btnCancelarContacto" type="button" data-dismiss="modal" class="btn btn-outline-danger btn-block"
-                                >Cerrar</button>
+                            <button id="btnCancelarContacto" type="button" data-dismiss="modal"
+                                class="btn btn-outline-danger btn-block" onclick="location.reload()">CANCELAR</button>
                         </div>
                     </div>
-                    <div class="ml-5">
+                    <div id="divCanales" class="ml-5">
                         <div class="row mt-4">
                             <div class="col-md-2">
                                 <label for="canal">Canal de contacto 1</label>
@@ -282,7 +287,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div id="modal-footer" class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-dismiss="modal"
                         onclick="location.reload();">CERRAR</button>
                 </div>

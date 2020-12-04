@@ -75,8 +75,6 @@ function eliminarContacto(id_contacto){
 
 function crearContacto(){
     let nombre = document.getElementById(`nombreContacto`).value;
-    let apellidoContacto = document.getElementById(`apellidoContacto`).value;
-    let nombre_completo = nombre + " "+ apellidoContacto;
     let cargoContacto = document.getElementById(`cargoContacto`).value;
     let emailContacto = document.getElementById(`emailContacto`).value;
     let companiaContacto = document.getElementById(`companiaContacto`).value;
@@ -85,7 +83,7 @@ function crearContacto(){
     let interes = document.getElementById(`interes`).value;
     fetch('http://127.0.0.1:3030/v1/contactos/nuevo-contacto', {
         method: 'POST',
-        body:`{"nombre_completo":"${nombre_completo}","cargo":"${cargoContacto}","email":"${emailContacto}",
+        body:`{"nombre_completo":"${nombre}","cargo":"${cargoContacto}","email":"${emailContacto}",
                 "id_compania":"${companiaContacto}","id_ciudad":"${ciudadContacto}","direccion":"${direccion}","interes":"${interes}"}`,
         headers: { "Authorization": "Bearer " + jwt,
                     "Content-Type":"application/json" }
@@ -207,9 +205,13 @@ function guardarCanal(id_canal) {
 }
 
 function editarContacto(id_contacto){
+    document.getElementById('divCanales').classList.add("nonvisible");
+    document.getElementById('modal-footer').classList.add("nonvisible");
     document.getElementById('tituloModalContacto').innerHTML = "Editar Contacto";
+    document.getElementById('guardarCrearContacto').classList.add("nonvisible");
+    document.getElementById('guardarEdicion').classList.remove("nonvisible");
+    document.getElementById('guardarEdicion').setAttribute("onclick",`actualizarContacto(${id_contacto})`);
     let nombre = document.getElementById(`nombreContacto`);
-    let apellidoContacto = document.getElementById(`apellidoContacto`);
     let cargoContacto = document.getElementById(`cargoContacto`);
     let emailContacto = document.getElementById(`emailContacto`);
     let companiaContacto = document.getElementById(`companiaContacto`);
@@ -241,3 +243,30 @@ function editarContacto(id_contacto){
         console.log(error);
     });
 }
+
+function actualizarContacto(id_contacto){
+    let nombre = document.getElementById(`nombreContacto`).value;
+    let cargoContacto = document.getElementById(`cargoContacto`).value;
+    let emailContacto = document.getElementById(`emailContacto`).value;
+    let companiaContacto = document.getElementById(`companiaContacto`).value;
+    let ciudadContacto = document.getElementById(`ciudad`).value;
+    let direccion = document.getElementById(`direccion`).value;
+    let interes = document.getElementById(`interes`).value;
+    fetch(`http://127.0.0.1:3030/v1/contactos/contacto/`, {
+        method: 'PUT',
+        body:`{"id":"${id_contacto}","nombre_completo":"${nombre}","cargo":"${cargoContacto}","email":"${emailContacto}",
+                "id_compania":"${companiaContacto}","id_ciudad":"${ciudadContacto}","direccion":"${direccion}","interes":"${interes}"}`,
+        headers: { "Authorization": "Bearer " + jwt,
+                    "Content-Type":"application/json" }
+    }).then(res => {
+        res.json().then(data => {
+            id_contactoCreado = data;
+            //document.getElementById('btnGuardarContacto').setAttribute("disabled",true);
+            alert("los datos de contacto se actualizaron exitosamente");
+            location.reload();
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+}
+

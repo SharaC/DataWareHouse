@@ -11,8 +11,20 @@ let selPaisCiudad = document.getElementById("selPaisCiudad");
 let modalConfirmaEliminar = document.getElementById("modal-edit");
 let plantilla_modal;
 
+window.onload = function () {
+    if (jwt != null) {
+        if (parseJwt(jwt).rol == 1) {
+            seccionUsuarios.classList.remove("nonvisible");
+        }
+        document.getElementById("body").classList.remove("nonvisible");
+        mostrarArbolRegiones();
+    }else{
+        alert("usuario no autenticado!")
+        location.href = "../html/login.html";
+    }
 
-mostrarArbolRegiones();
+};
+
 
 function mostrarArbolRegiones() {
     let nombreRegion = "";
@@ -391,6 +403,16 @@ function eliminarElemento(ruta_eliminar){
         console.log(error);
     });
 }
+
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
 
 function cerrarSesion() {
     sessionStorage.clear();

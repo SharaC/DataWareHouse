@@ -1,10 +1,24 @@
 const jwt = sessionStorage.getItem("usertoken");
 let plantilla;
 let modalConfirmaEliminar = document.getElementById("modalEliminarContacto");
+let seccionUsuarios = document.getElementById("seccionUsuarios");
 let plantilla_modal;
 let id_contactoCreado;
 
-listarContactos();
+window.onload = function () {
+    if (jwt != null) {
+        if (parseJwt(jwt).rol == 1) {
+            seccionUsuarios.classList.remove("nonvisible");
+        }
+        document.getElementById("body").classList.remove("nonvisible");
+        listarContactos();
+    }else{
+        alert("usuario no autenticado!")
+        location.href = "../html/login.html";
+    }
+
+};
+
 
 function listarContactos() {
     fetch('http://127.0.0.1:3030/v1/contactos/', {
@@ -311,6 +325,16 @@ function buscarContacto() {
         console.log(error);
     });
 }
+
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
+};
 
 function cerrarSesion() {
     sessionStorage.clear();

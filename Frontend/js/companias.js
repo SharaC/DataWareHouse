@@ -3,10 +3,23 @@ let plantilla;
 let modalConfirmaEliminar = document.getElementById("modal-edit");
 let plantilla_modal;
 
-listarCompanias();
 let selectNuevaRegion = document.getElementById("regionCompania");
 let selectNuevoPais = document.getElementById("paisCompania");
 let selectNuevaCiudad = document.getElementById("ciudadCompania");
+
+window.onload = function () {
+    if (jwt != null) {
+        if (parseJwt(jwt).rol == 1) {
+            seccionUsuarios.classList.remove("nonvisible");
+        }
+        document.getElementById("body").classList.remove("nonvisible");
+        listarCompanias();
+    }else{
+        alert("usuario no autenticado!")
+        location.href = "../html/login.html";
+    }
+
+};
 
 function cargarRegiones() {
     fetch('http://127.0.0.1:3030/v1/localizacion/regiones', {
@@ -308,6 +321,16 @@ function crearCompania(){
             console.log(response.json);
         }
     });
+};
+
+function parseJwt (token) {
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+
+    return JSON.parse(jsonPayload);
 };
 
 function cerrarSesion() {

@@ -19,11 +19,11 @@ En el directorio **./src/startup** se encuentra el archivo de parámetros a conf
 
 ```
 - HOST_DATABASE: 'localhost'
-- appPort: < puerto_express >
+- appPort: '< puerto_express >'
 - NAME_DATABASE: 'datawarehouse'
-- USER_DATABASE: < usuario >
-- PASSWORD_DATABASE: < password >
-- SECRET: < palabra de secreto para generar los tokens JWT >
+- USER_DATABASE: '< usuario >'
+- PASSWORD_DATABASE: '< password >'
+- SECRET: '< palabra de secreto para generar los tokens JWT >'
 ```
 
 - Omita los caracteres: < > y reemplace por los valores de su preferencia

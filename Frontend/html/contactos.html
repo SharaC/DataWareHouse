@@ -74,11 +74,12 @@
             <section id="tablacontactos" class="col-12 mt-5">
                 <div class="row">
                     <div class="table-responsive">
-                        <a class="float-right text-danger nonvisible" data-toggle="modal" data-target="#eliminarContactoMasivo"><i
-                                class="fas fa-trash-alt"></i> Eliminar contactos</a>
+                        <a class="float-right text-danger nonvisible" data-toggle="modal"
+                            data-target="#eliminarContactoMasivo"><i class="fas fa-trash-alt"></i> Eliminar
+                            contactos</a>
                         <table class="table">
                             <thead class="thead-dark">
-                                <tr>                                    
+                                <tr>
                                     <th><input type="checkbox" name="" id=""></th>
                                     <th>Contacto <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
                                     <th>País/Región <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
@@ -88,7 +89,7 @@
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody id="rows">                                                                
+                            <tbody id="rows">
                             </tbody>
                         </table>
                     </div>
@@ -161,7 +162,7 @@
                         <div class="col-md-4 mt-2">
                             <label for="direccion">Dirección *</label>
                             <input type="text" name="direccion" id="direccion" class="form-control">
-                        </div>                        
+                        </div>
                         <div class="col-md-4 mt-2">
                             <label for="interes" class="text-white">Interés</label>
                             <select name="interes" id="interes" class="form-control">
@@ -174,7 +175,9 @@
                         </div>
                         <div class="col-md-4 mt-2">
                             <label for="interes" class="text-white">Guardar</label>
-                            <button type="button" class="btn btn-success btn-block" onclick="crearContacto()">Guardar contacto</button>
+                            <button id="btnGuardarContacto" type="button" class="btn btn-success btn-block"
+                                onclick="crearContacto()">Guardar
+                                contacto</button>
                         </div>
                     </div>
                     <div class="ml-5">
@@ -197,8 +200,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="canal" class="text-white">Asociar Canal</label>
-                                <button type="text" id="canal-whatsapp" class="form-control"
-                                    onclick="guadarCanal(1)" disabled="true">Asociar
+                                <button type="text" id="canal-whatsapp" class="form-control btn btn-success btn-block"
+                                    onclick="guardarCanal(1)" disabled="true">Asociar
                                     canal</button>
                             </div>
                         </div>
@@ -221,7 +224,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="canal" class="text-white">Asociar Canal</label>
-                                <button type="text" id="canal-telefono" class="form-control" onclick="guadarCanal(2)" disabled="true">
+                                <button type="text" id="canal-telefono" class="form-control btn btn-success btn-block"
+                                    onclick="guardarCanal(2)" disabled="true">
                                     Asociar
                                     canal</button>
                             </div>
@@ -245,7 +249,8 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="canal" class="text-white">Asociar Canal</label>
-                                <button type="text" id="canal-email" class="form-control" onclick="guadarCanal(3)" disabled="true">Asociar
+                                <button type="text" id="canal-email" class="form-control btn btn-success btn-block"
+                                    onclick="guardarCanal(3)" disabled="true">Asociar
                                     canal</button>
                             </div>
                         </div>
@@ -268,15 +273,16 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="canal" class="text-white">Asociar Canal</label>
-                                <button type="text" id="canal-facebook" class="form-control"
-                                    onclick="guadarCanal(4)" disabled="true">Asociar
+                                <button type="text" id="canal-facebook" class="form-control btn btn-success btn-block"
+                                    onclick="guardarCanal(4)" disabled="true">Asociar
                                     canal</button>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>                    
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal"
+                        onclick="location.reload();">CERRAR</button>
                 </div>
             </div>
         </div>
@@ -307,7 +313,7 @@
     <!-- modal eliminar contacto individual -->
     <div class="modal fade" id="eliminarContactoIndividual" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
+            <div id="modalEliminarContacto" class="modal-content">
 
                 <div class="modal-body">
                     <div class="mb-3 text-center">
@@ -318,7 +324,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-danger d-block">Eliminar</button>
+                    <button id="btnEliminarContacto" type="button" class="btn btn-danger d-block">Eliminar</button>
                 </div>
             </div>
         </div>

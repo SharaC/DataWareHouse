@@ -1,7 +1,8 @@
 const jwt = sessionStorage.getItem("usertoken");
 let plantilla;
-let modalConfirmaEliminar = document.getElementById("modal-edit");
+let modalConfirmaEliminar = document.getElementById("modalEliminarContacto");
 let plantilla_modal;
+let id_contactoCreado;
 
 listarContactos();
 
@@ -29,8 +30,8 @@ function listarContactos() {
                                 </td>
                                 <td class="text-center">
                                     <div>
-                                        <a id="elim-${fila.id_contacto}" class="btn btn-danger" data-toggle="modal" data-target="#eliminarContactoIndividual"><i class="fas fa-trash-alt"></i></a>
-                                        <a id="edit-${fila.id_contacto}" class="btn btn-primary" onclick="editarContacto(${fila.id_contacto})"><i class="fas fa-pencil-alt"></i></a>
+                                        <a id="elim-${fila.id}" class="btn btn-danger" data-toggle="modal" data-target="#eliminarContactoIndividual" onclick="modificarModal(${fila.id})"><i class="fas fa-trash-alt"></i></a>
+                                        <a id="edit-${fila.id}" class="btn btn-primary" onclick="editarContacto(${fila.id})"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>`;
@@ -42,10 +43,40 @@ function listarContactos() {
     });
 }
 
+function modificarModal(id_contacto) {
+    plantilla_modal = `<div class="modal-body">
+                        <div class="mb-3 text-center">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREziGsRatBq43p8iJyM4Ezqa71SAZg33UhuA&usqp=CAU"
+                                class="avatar-pic" alt="">
+                            <p class="mt-5">¿Seguro desea eliminar el contacto seleccionado?</p>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-danger d-block" onclick="eliminarContacto(${id_contacto})">Eliminar</button>
+                        </div>`;
+    modalConfirmaEliminar.innerHTML = plantilla_modal;
+}
+
+function eliminarContacto(id_contacto){
+    fetch(`http://127.0.0.1:3030/v1/contactos/contacto/${id_contacto}/confirm-delete`, {
+        method: 'DELETE',
+        headers: { "Authorization": "Bearer " + jwt,
+                    "Content-Type":"application/json" }
+    }).then(res => {
+        res.json().then(data => {
+            console.log(data);
+        });
+        location.reload();
+    }).catch(error => {
+        console.log(error);
+    });
+}
+
 function crearContacto(){
     let nombre = document.getElementById(`nombreContacto`).value;
     let apellidoContacto = document.getElementById(`apellidoContacto`).value;
-    let nombre_completo = nombre + apellidoContacto;
+    let nombre_completo = nombre + " "+ apellidoContacto;
     let cargoContacto = document.getElementById(`cargoContacto`).value;
     let emailContacto = document.getElementById(`emailContacto`).value;
     let companiaContacto = document.getElementById(`companiaContacto`).value;
@@ -60,9 +91,12 @@ function crearContacto(){
                     "Content-Type":"application/json" }
     }).then(res => {
         res.json().then(data => {
-            console.log(data);
+            id_contactoCreado = data;
+            document.getElementById('btnGuardarContacto').setAttribute("disabled",true);
+            document.querySelectorAll("[id^='canal-']").forEach(btn => {
+                btn.removeAttribute("disabled");
+            })
         });
-        location.reload();
     }).catch(error => {
         console.log(error);
     });
@@ -139,89 +173,19 @@ function cargarCiudades() {
     });
 }
 
-
-
-
-function editarUser(id_usuario){
-    document.getElementById(`labelEdit-user${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`labelEdit-nombre${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`labelEdit-email${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`labelEdit-perfil${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`inputEdit-user${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`inputEdit-nombre${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`inputEdit-email${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`selectEdit-perfil${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`edit-user${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`save-user${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`del-user${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`cancelEdit-user${id_usuario}`).classList.remove("nonvisible");
-}
-
-function guardarCambiosUser(id_usuario){
-    let usernameActualizado = document.querySelector(`#inputEdit-user${id_usuario}>input`).value;
-    let nombreActualizado = document.querySelector(`#inputEdit-nombre${id_usuario}>input`).value;
-    let emailActualizado = document.querySelector(`#inputEdit-email${id_usuario}>input`).value;
-    let perfilActualizado = document.querySelector(`#selectEdit-perfil${id_usuario}>select`).value;
-    fetch('http://127.0.0.1:3030/v1/usuarios/user', {
-        method: 'PUT',
-        body:`{"id":"${id_usuario}","username":"${usernameActualizado}","nombre_completo":"${nombreActualizado}",
-                "nombre_completo":"${nombreActualizado}","email":"${emailActualizado}","id_perfil":"${perfilActualizado}"}`,
-        headers: { "Authorization": "Bearer " + jwt,
-                    "Content-Type":"application/json" }
-    }).then(res => {
-        res.json().then(data => {
-        console.log(data);
-        });
-        document.getElementById(`labelEdit-user${id_usuario}`).classList.remove("nonvisible");
-        document.getElementById(`labelEdit-nombre${id_usuario}`).classList.remove("nonvisible");
-        document.getElementById(`labelEdit-email${id_usuario}`).classList.remove("nonvisible");
-        document.getElementById(`labelEdit-perfil${id_usuario}`).classList.remove("nonvisible");
-        document.getElementById(`inputEdit-user${id_usuario}`).classList.add("nonvisible");
-        document.getElementById(`inputEdit-nombre${id_usuario}`).classList.add("nonvisible");
-        document.getElementById(`inputEdit-email${id_usuario}`).classList.add("nonvisible");
-        document.getElementById(`selectEdit-perfil${id_usuario}`).classList.add("nonvisible");
-        document.getElementById(`edit-user${id_usuario}`).classList.remove("nonvisible");
-        document.getElementById(`save-user${id_usuario}`).classList.add("nonvisible");
-        document.getElementById(`del-user${id_usuario}`).classList.remove("nonvisible");
-        document.getElementById(`cancelEdit-user${id_usuario}`).classList.add("nonvisible");
-        location.reload();
-    }).catch(error => {
-        console.log(error);
-    });
-}
-
-function cancelarEditUser(id_usuario){
-    document.getElementById(`labelEdit-user${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`labelEdit-nombre${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`labelEdit-email${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`labelEdit-perfil${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`inputEdit-user${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`inputEdit-nombre${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`inputEdit-email${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`selectEdit-perfil${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`edit-user${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`save-user${id_usuario}`).classList.add("nonvisible");
-    document.getElementById(`del-user${id_usuario}`).classList.remove("nonvisible");
-    document.getElementById(`cancelEdit-user${id_usuario}`).classList.add("nonvisible");
-}
-
-function eliminarUser(id_usuario){
-    plantilla_modal = `<p id="modal eliminar">¿Está seguro que desea eliminar el usuario?</p>
-                    <button id="btnAceptarEliminar" class="btn btn-success" onclick="eliminarElemento('${id_usuario}')">ACEPTAR</button>
-                    <button id="btnCancelarEliminar" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>`;
-    modalConfirmaEliminar.innerHTML = plantilla_modal;
-}
-
-function eliminarElemento(id_usuario){
-    fetch(`http://127.0.0.1:3030/v1/usuarios/user/${id_usuario}/confirm-delete`, {
-        method: 'DELETE',
+function guardarCanal(id_canal) {
+    let nombreCuentaUsuario = document.querySelectorAll(`#cuenta`);
+    let preferencia = document.querySelectorAll(`#preferencias`);
+    fetch('http://127.0.0.1:3030/v1/contactos/canal-contacto', {
+        method: 'POST',
+        body:`{"id_canal":"${id_canal}","id_contacto":"${id_contactoCreado}","cuenta_usuario":"${nombreCuentaUsuario[0].value}",
+                "preferencia":"${preferencia[0].value}"}`,
         headers: { "Authorization": "Bearer " + jwt,
                     "Content-Type":"application/json" }
     }).then(res => {
         res.json().then(data => {
             console.log(data);
         });
-        location.reload();
     }).catch(error => {
         console.log(error);
     });

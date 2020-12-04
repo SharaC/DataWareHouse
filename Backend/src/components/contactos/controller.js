@@ -35,7 +35,7 @@ const crearContacto = (req, res) => {
         replacements: [nombre_completo,cargo,email,id_compania,direccion,interes,id_ciudad],
         type: conexion.QueryTypes.INSERT
     }).then(result => {
-        res.status(200).json("Se creó el contacto con id: " + result[0]);
+        res.status(200).json(result[0]);
     }).catch(err => {
         res.status(500).json(err);
     });
@@ -57,7 +57,8 @@ const editarContacto = (req, res) => {
 
 const eliminarContacto = (req, res) => {
     let id = req.params.id;
-    conexion.query(`DELETE from contactos WHERE id=${id};`,
+    conexion.query(`DELETE from canales_contacto WHERE id_contacto=${id};
+                    DELETE from contactos WHERE id=${id};`,
         {
             type: conexion.QueryTypes.UPDATE
         }).then(result => {
@@ -73,10 +74,24 @@ const eliminarContacto = (req, res) => {
     
 }
 
+const crearCanalContacto = (req, res) => {
+    let {id_contacto,id_canal,cuenta_usuario,preferencia} = req.body;
+    conexion.query("INSERT INTO `canales_contacto` (`id_contacto`,`id_canal`,`cuenta_usuario`,`preferencia`) VALUES (?,?,?,?);",
+    {
+        replacements: [id_contacto,id_canal,cuenta_usuario,preferencia],
+        type: conexion.QueryTypes.INSERT
+    }).then(result => {
+        res.status(200).json(result[0]);
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+}
+
 module.exports = { 
     listarContactos,
     listarContactoID,
     crearContacto,
+    crearCanalContacto,
     editarContacto,
     eliminarContacto
 }

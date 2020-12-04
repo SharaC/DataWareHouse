@@ -29,8 +29,8 @@ function listarContactos() {
                                 </td>
                                 <td class="text-center">
                                     <div>
-                                        <a class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                                        <a class="btn btn-primary"><i class="fas fa-pencil-alt"></i></a>
+                                        <a id="elim-${fila.id_contacto}" class="btn btn-danger" onclick="eliminarContacto(${fila.id_contacto})"><i class="fas fa-trash-alt"></i></a>
+                                        <a id="edit-${fila.id_contacto}" class="btn btn-primary" onclick="editarContacto(${fila.id_contacto})"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>`;
@@ -42,20 +42,20 @@ function listarContactos() {
     });
 }
 
-function GuardarContacto(){
+function crearContacto(){
     let nombre = document.getElementById(`nombreContacto`).value;
     let apellidoContacto = document.getElementById(`apellidoContacto`).value;
     let nombre_completo = nombre + apellidoContacto;
     let cargoContacto = document.getElementById(`cargoContacto`).value;
     let emailContacto = document.getElementById(`emailContacto`).value;
     let companiaContacto = document.getElementById(`companiaContacto`).value;
+    let ciudadContacto = document.getElementById(`ciudad`).value;
     let direccion = document.getElementById(`direccion`).value;
-    let interes = document.getElementById(`myRange`).value;
-    let porcentaje = document.getElementById(`porcentaje`).value;
+    let interes = document.getElementById(`interes`).value;
     fetch('http://127.0.0.1:3030/v1/contactos/nuevo-contacto', {
-        method: 'PUT',
+        method: 'POST',
         body:`{"nombre_completo":"${nombre_completo}","cargo":"${cargoContacto}","email":"${emailContacto}",
-                "compania":"${companiaContacto}","direccion":"${direccion}","interes":"${interes}"}`,
+                "id_compania":"${companiaContacto}","id_ciudad":"${ciudadContacto}","direccion":"${direccion}","interes":"${interes}"}`,
         headers: { "Authorization": "Bearer " + jwt,
                     "Content-Type":"application/json" }
     }).then(res => {

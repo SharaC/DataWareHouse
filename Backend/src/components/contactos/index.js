@@ -9,10 +9,10 @@ const {
 } = require('./controller');
 
 router.get('/', validarToken, listarContactos);
-router.get('/producto/:id', validarToken, listarContactoID);
-router.post('/nuevo-producto', validarToken, crearContacto);
-router.put('/producto', validarToken, editarContacto);
-router.delete('/producto/:id/confirm-delete', validarToken, eliminarContacto);
+router.get('/contacto/:id', validarToken, listarContactoID);
+router.post('/nuevo-contacto', validarToken, crearContacto);
+router.put('/contacto', validarToken, editarContacto);
+router.delete('/contacto/:id/confirm-delete', validarToken, eliminarContacto);
 
 
 module.exports = router;

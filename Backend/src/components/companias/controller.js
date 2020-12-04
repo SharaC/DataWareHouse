@@ -10,7 +10,7 @@ const listarCompanias = (req, res) => {
     {
         type: conexion.QueryTypes.SELECT
     }).then(result => {
-        result.length === 0 ? res.status(404).json("no se encuentran compañías registradas aún") : res.status(200).json(result);
+        result.length === 0 ? res.status(404).json(0) : res.status(200).json(result);
     }).catch(err => {
         res.status(500).json(err);
     });

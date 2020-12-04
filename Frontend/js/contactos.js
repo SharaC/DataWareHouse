@@ -270,3 +270,45 @@ function actualizarContacto(id_contacto){
     });
 }
 
+function buscarContacto() {
+    let terminoBusqueda = document.getElementById("busquedaContacto").value;
+    fetch(`http://127.0.0.1:3030/v1/contactos/busqueda/${terminoBusqueda}`, {
+        method: 'GET',
+        headers: { "Authorization": "Bearer " + jwt}
+    }).then(res => {
+        res.json().then(data => {
+            rows.innerHTML="";
+            if (res.status === 200) {
+                data.forEach((fila) => {
+                    plantilla = `<tr>
+                                    <td class="align-middle"><input type="checkbox" name="" id=""></td>
+                                    <td><img src="../assets/contact.png"
+                                            alt="..." class="img-table"> ${fila.Nombre}</td>
+                                    <td>${fila.Pais}/ ${fila.Ciudad}</td>
+                                    <td>${fila.Compania}</td>
+                                    <td>${fila.Cargo}</td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-warning" role="progressbar" style="width:${fila.Interes}%"
+                                                aria-valuenow="${fila.Interes}" aria-valuemin="0" aria-valuemax="100">
+                                            </div>
+                                        </div>
+                                        <label>${fila.Interes}%</label>
+                                    </td>
+                                    <td class="text-center">
+                                        <div>
+                                            <a id="elim-${fila.id}" class="btn btn-danger" data-toggle="modal" data-target="#eliminarContactoIndividual" onclick="modificarModal(${fila.id})"><i class="fas fa-trash-alt"></i></a>
+                                            <a id="edit-${fila.id}" class="btn btn-primary" data-toggle="modal" data-target="#agregarContacto" onclick="editarContacto(${fila.id})"><i class="fas fa-pencil-alt"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>`;
+                    rows.insertAdjacentHTML('beforeend', plantilla);
+                });
+            }
+            
+        });
+    }).catch(error => {
+        console.log(error);
+    });
+}
+

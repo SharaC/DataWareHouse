@@ -25,6 +25,10 @@ function cargarRegiones() {
 }
 
 function cargarPaises() {
+    selectNuevoPais.innerHTML=`<select name="PaisCompania" class="form-control" id="paisCompania"
+                            onchange="cargarCiudades()" required>
+                            <option value="0" disabled selected>Seleccione un país</option>
+                        </select>`;
     fetch(`http://127.0.0.1:3030/v1/localizacion/pais-region/${selectNuevaRegion.value}`, {
         method: 'GET',
         headers: { "Authorization": "Bearer " + jwt }
@@ -41,6 +45,9 @@ function cargarPaises() {
 }
 
 function cargarCiudades() {
+    selectNuevaCiudad.innerHTML=`<select name="ciudadCompania" class="form-control" id="ciudadCompania" required>
+                            <option value="0" disabled selected>Seleccione una ciudad</option>
+                        </select>`;
     fetch(`http://127.0.0.1:3030/v1/localizacion/ciudad-pais/${selectNuevoPais.value}`, {
         method: 'GET',
         headers: { "Authorization": "Bearer " + jwt }
@@ -129,7 +136,7 @@ function editarCompania(id_compania){
     document.getElementById(`save-compania${id_compania}`).classList.remove("nonvisible");
     document.getElementById(`del-compania${id_compania}`).classList.add("nonvisible");
     document.getElementById(`cancelEdit-compania${id_compania}`).classList.remove("nonvisible");
-    listarRegiones();
+    listarRegiones(id_compania);
 }
 
 function listarRegiones(id_compania) {
@@ -154,7 +161,10 @@ function listarRegiones(id_compania) {
 function listarPaises(id_compania) {
     let selRegionPais = document.getElementById(`Edit-region${id_compania}`);
     let selPais = document.getElementById(`Edit-pais${id_compania}`);
-    selPais.innerHTML='<option value="0" disabled selected>Seleccione el pais</option>';
+    selPais.innerHTML=`<select name="PaisCompania" class="form-control" id="paisCompania"
+                            onchange="cargarCiudades()" required>
+                            <option value="0" disabled selected>Seleccione un país</option>
+                        </select>`;
     fetch(`http://127.0.0.1:3030/v1/localizacion/pais-region/${selRegionPais.value}`, {
         method: 'GET',
         headers: { "Authorization": "Bearer " + jwt }
@@ -173,7 +183,9 @@ function listarPaises(id_compania) {
 function listarCiudades(id_compania) {
     let selPaisCiudad = document.getElementById(`Edit-pais${id_compania}`);
     let selCiudad = document.getElementById(`Edit-ciudad${id_compania}`);
-    selCiudad.innerHTML='<option value="0" disabled selected>Seleccione la ciudad</option>';
+    selCiudad.innerHTML=`<select name="ciudadCompania" class="form-control" id="ciudadCompania" required>
+                            <option value="0" disabled selected>Seleccione una ciudad</option>
+                        </select>`;
     fetch(`http://127.0.0.1:3030/v1/localizacion/ciudad-pais/${selPaisCiudad.value}`, {
         method: 'GET',
         headers: { "Authorization": "Bearer " + jwt }

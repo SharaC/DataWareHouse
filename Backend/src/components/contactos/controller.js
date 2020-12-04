@@ -15,6 +15,7 @@ const listarContactos = (req, res) => {
     });
 }
 
+
 const listarContactoID = (req, res) => {
     let id = req.params.id;
     conexion.query(`SELECT CON.id, CON.nombre_completo AS Nombre, CON.cargo AS Cargo, CON.email AS Email, 
@@ -31,6 +32,27 @@ const listarContactoID = (req, res) => {
         type: conexion.QueryTypes.SELECT
     }).then(result => {
         result.length === 0 ? res.status(404).json("no se encontró el contacto solicitado") : res.status(200).json(result);
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+}
+
+const listarContactoBusqueda = (req, res) => {
+    let terminoBusqueda = req.params.terminoBusqueda;
+    console.log("termino: "+terminoBusqueda)
+    conexion.query(`SELECT CON.id, CON.nombre_completo AS Nombre, CON.cargo AS Cargo, CON.email AS Email, COMP.nombre AS Compania, 
+                    CON.direccion AS Direccion, CON.interes AS Interes, CIU.nombre AS Ciudad, PAI.nombre AS Pais 
+                    FROM contactos CON
+                    INNER JOIN ciudades CIU ON CIU.id = CON.id_ciudad
+                    INNER JOIN paises PAI ON PAI.id = CIU.id_paises
+                    INNER JOIN companias COMP ON COMP.id = CON.id_compania
+                    WHERE CON.nombre_completo like '%${terminoBusqueda}%' or COMP.nombre like '%${terminoBusqueda}%' 
+                    or CON.cargo like '%${terminoBusqueda}%' or CON.email like '%${terminoBusqueda}%' or CON.direccion like '%${terminoBusqueda}%' 
+                    or PAI.nombre like '%${terminoBusqueda}%' or CIU.nombre like '%${terminoBusqueda}%';`,
+    {
+        type: conexion.QueryTypes.SELECT
+    }).then(result => {
+        result.length === 0 ? res.status(404).json("no se encontraron contactos que coincidan con la búsqueda") : res.status(200).json(result);
     }).catch(err => {
         res.status(500).json(err);
     });
@@ -101,5 +123,6 @@ module.exports = {
     crearContacto,
     crearCanalContacto,
     editarContacto,
-    eliminarContacto
+    eliminarContacto,
+    listarContactoBusqueda
 }

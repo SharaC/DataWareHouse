@@ -6,11 +6,13 @@ const {
     crearContacto,
     crearCanalContacto,
     editarContacto,
-    eliminarContacto
+    eliminarContacto,
+    listarContactoBusqueda
 } = require('./controller');
 
 router.get('/', validarToken, listarContactos);
 router.get('/contacto/:id', validarToken, listarContactoID);
+router.get('/busqueda/:terminoBusqueda', validarToken, listarContactoBusqueda);
 router.post('/nuevo-contacto', validarToken, crearContacto);
 router.put('/contacto', validarToken, editarContacto);
 router.delete('/contacto/:id/confirm-delete', validarToken, eliminarContacto);

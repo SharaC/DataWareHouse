@@ -29,7 +29,7 @@ function listarContactos() {
                                 </td>
                                 <td class="text-center">
                                     <div>
-                                        <a id="elim-${fila.id_contacto}" class="btn btn-danger" onclick="eliminarContacto(${fila.id_contacto})"><i class="fas fa-trash-alt"></i></a>
+                                        <a id="elim-${fila.id_contacto}" class="btn btn-danger" data-toggle="modal" data-target="#eliminarContactoIndividual"><i class="fas fa-trash-alt"></i></a>
                                         <a id="edit-${fila.id_contacto}" class="btn btn-primary" onclick="editarContacto(${fila.id_contacto})"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                 </td>

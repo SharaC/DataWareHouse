@@ -5,7 +5,8 @@ const listarContactos = (req, res) => {
                     FROM contactos CON
                     INNER JOIN ciudades CIU ON CIU.id = CON.id_ciudad
                     INNER JOIN paises PAI ON PAI.id = CIU.id_paises
-                    INNER JOIN companias COMP ON COMP.id = CON.id_compania;`,
+                    INNER JOIN companias COMP ON COMP.id = CON.id_compania
+                    ORDER BY CON.id DESC;`,
     {
         type: conexion.QueryTypes.SELECT
     }).then(result => {

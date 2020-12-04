@@ -105,7 +105,7 @@ function crearContacto(){
         res.json().then(data => {
             id_contactoCreado = data;
             //document.getElementById('btnGuardarContacto').setAttribute("disabled",true);
-            alert("los datos de contacto se actualizaron exitosamente");
+            alert("los datos de contacto se guardaron exitosamente");
             document.querySelectorAll("[id^='canal-']").forEach(btn => {
                 btn.removeAttribute("disabled");
             })
@@ -212,6 +212,7 @@ function guardarCanal(id_canal) {
     }).then(res => {
         res.json().then(data => {
             console.log(data);
+            alert("El canal se asoció correctamente al usuario");
         });
     }).catch(error => {
         console.log(error);

@@ -74,11 +74,11 @@
             <section id="tablacontactos" class="col-12 mt-5">
                 <div class="row">
                     <div class="table-responsive">
-                        <a class="float-right text-danger" data-toggle="modal" data-target="#eliminarContacto"><i
+                        <a class="float-right text-danger nonvisible" data-toggle="modal" data-target="#eliminarContactoMasivo"><i
                                 class="fas fa-trash-alt"></i> Eliminar contactos</a>
                         <table class="table">
                             <thead class="thead-dark">
-                                <tr>
+                                <tr>                                    
                                     <th><input type="checkbox" name="" id=""></th>
                                     <th>Contacto <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
                                     <th>País/Región <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
@@ -107,65 +107,62 @@
                             <h5 class="modal-title" id="titulo">Nuevo contacto</h5>
                         </div>
                         <div class="row border p-4 ml-4 mr-4 bg-white rounded">
-                            <div class="col-md-2">
+                            <div class="col-md-1 p-0">
                                 <img src="../assets/contact.png" class="rounded-circle z-depth-1-half avatar-pic"
                                     alt="example placeholder avatar">
-                                <input type="file" id="myfile" style="display: none;">
                             </div>
-
-                            <div class=" col-md-2">
-                                <label for="nombreContacto">Nombre *</label>
-                                <input type="text" name="nombre" id="nombreContacto" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="apellidoContacto">Apellido *</label>
-                                <input type="text" name="apellido" id="apellidoContacto" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="cargoContacto">Cargo *</label>
-                                <input type="text" name="cargo" id="cargoContacto" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="emailContacto">Email *</label>
-                                <input type="email" name="email" id="emailContacto" class="form-control">
-                            </div>
-                            <div class="col-md-2">
-                                <label for="companiaContacto">Compañía *</label>
-                                <select name="compania" id="companiaContacto" class="form-control">
-                                    <option value="0" disabled selected>Seleccione una compañía</option>
-                                </select>
+                            <div class="row col">
+                                <div class=" col-md-2 pr-0">
+                                    <label for="nombreContacto">Nombre *</label>
+                                    <input type="text" name="nombre" id="nombreContacto" class="form-control">
+                                </div>
+                                <div class="col-md-2 pr-0">
+                                    <label for="apellidoContacto">Apellido *</label>
+                                    <input type="text" name="apellido" id="apellidoContacto" class="form-control">
+                                </div>
+                                <div class="col-md-2 pr-0">
+                                    <label for="cargoContacto">Cargo *</label>
+                                    <input type="text" name="cargo" id="cargoContacto" class="form-control">
+                                </div>
+                                <div class="col-md-3 pr-0">
+                                    <label for="emailContacto">Email *</label>
+                                    <input type="email" name="email" id="emailContacto" class="form-control">
+                                </div>
+                                <div class="col-md-3 pr-0">
+                                    <label for="companiaContacto">Compañía *</label>
+                                    <select name="compania" id="companiaContacto" class="form-control pl-0">
+                                        <option value="0" disabled selected>Seleccione una compañía</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row bg-white">
-                        <div class="col-md-2">
+                    <div class="row bg-white border-bottom pb-5">
+                        <div class="col-md-4">
                             <label for="region">Región *</label>
                             <select name="region" id="region" class="form-control" onchange="cargarPaises()">
                                 <option value="0" disabled selected>Seleccione una región</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="pais">País *</label>
                             <select name="pais" id="pais" class="form-control" onchange="cargarCiudades()">
                                 <option value="0" disabled selected>Seleccione un país</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4">
                             <label for="ciudad">Ciudad *</label>
                             <select name="ciudad" id="ciudad" class="form-control">
                                 <option value="0" disabled selected>Seleccione una ciudad</option>
                             </select>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-4 mt-2">
                             <label for="direccion">Dirección *</label>
                             <input type="text" name="direccion" id="direccion" class="form-control">
                         </div>                        
-                        <div class="col-md-1">
+                        <div class="col-md-4 mt-2">
                             <label for="interes" class="text-white">Interés</label>
                             <select name="interes" id="interes" class="form-control">
                                 <option value="0">0%</option>
@@ -175,114 +172,119 @@
                                 <option value="100">100%</option>
                             </select>
                         </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-md-2">
-                            <label for="canal">Canal de contacto 1</label>
-                            <label for="canal">WhatsApp</label>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cuenta">Cuenta</label>
-                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
-                        </div>
-                        <div class="col-md-2">
-                            <label for="preferencias">Preferencias</label>
-                            <select name="preferencias" id="preferencias" class="form-control">
-                                <option value="1">Sin preferencia</option>
-                                <option value="2">Canal favorito</option>
-                                <option value="3">No molestar</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="canal" class="text-white">Guardar Canal</label>
-                            <button type="text" id="canal-whatsapp" class="form-control"
-                                onclick="guadarCanal(1)">Guardar
-                                canal</button>
+                        <div class="col-md-4 mt-2">
+                            <label for="interes" class="text-white">Guardar</label>
+                            <button type="button" class="btn btn-success btn-block" onclick="crearContacto()">Guardar contacto</button>
                         </div>
                     </div>
-                    <div class="row mt-4">
-                        <div class="col-md-2">
-                            <label for="canal">Canal de contacto 2</label>
-                            <label for="canal">Teléfono</label>
+                    <div class="ml-5">
+                        <div class="row mt-4">
+                            <div class="col-md-2">
+                                <label for="canal">Canal de contacto 1</label>
+                                <label for="canal">WhatsApp</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cuenta">Cuenta</label>
+                                <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="preferencias">Preferencias</label>
+                                <select name="preferencias" id="preferencias" class="form-control">
+                                    <option value="1">Sin preferencia</option>
+                                    <option value="2">Canal favorito</option>
+                                    <option value="3">No molestar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="canal" class="text-white">Asociar Canal</label>
+                                <button type="text" id="canal-whatsapp" class="form-control"
+                                    onclick="guadarCanal(1)" disabled="true">Asociar
+                                    canal</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <label for="cuenta">Cuenta</label>
-                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                        <div class="row mt-4">
+                            <div class="col-md-2">
+                                <label for="canal">Canal de contacto 2</label>
+                                <label for="canal">Teléfono</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cuenta">Cuenta</label>
+                                <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="preferencias">Preferencias</label>
+                                <select name="preferencias" id="preferencias" class="form-control">
+                                    <option value="1">Sin preferencia</option>
+                                    <option value="2">Canal favorito</option>
+                                    <option value="3">No molestar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="canal" class="text-white">Asociar Canal</label>
+                                <button type="text" id="canal-telefono" class="form-control" onclick="guadarCanal(2)" disabled="true">
+                                    Asociar
+                                    canal</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <label for="preferencias">Preferencias</label>
-                            <select name="preferencias" id="preferencias" class="form-control">
-                                <option value="1">Sin preferencia</option>
-                                <option value="2">Canal favorito</option>
-                                <option value="3">No molestar</option>
-                            </select>
+                        <div class="row mt-4">
+                            <div class="col-md-2">
+                                <label for="canal">Canal de contacto 3</label>
+                                <label for="canal">e-mail</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cuenta">Cuenta</label>
+                                <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="preferencias">Preferencias</label>
+                                <select name="preferencias" id="preferencias" class="form-control">
+                                    <option value="1">Sin preferencia</option>
+                                    <option value="2">Canal favorito</option>
+                                    <option value="3">No molestar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="canal" class="text-white">Asociar Canal</label>
+                                <button type="text" id="canal-email" class="form-control" onclick="guadarCanal(3)" disabled="true">Asociar
+                                    canal</button>
+                            </div>
                         </div>
-                        <div class="col-md-2">
-                            <label for="canal" class="text-white">Guardar Canal</label>
-                            <button type="text" id="canal-telefono" class="form-control" onclick="guadarCanal(2)">
-                                Guardar
-                                canal</button>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-md-2">
-                            <label for="canal">Canal de contacto 3</label>
-                            <label for="canal">e-mail</label>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cuenta">Cuenta</label>
-                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
-                        </div>
-                        <div class="col-md-2">
-                            <label for="preferencias">Preferencias</label>
-                            <select name="preferencias" id="preferencias" class="form-control">
-                                <option value="1">Sin preferencia</option>
-                                <option value="2">Canal favorito</option>
-                                <option value="3">No molestar</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="canal" class="text-white">Guardar Canal</label>
-                            <button type="text" id="canal-email" class="form-control" onclick="guadarCanal(3)">Guardar
-                                canal</button>
-                        </div>
-                    </div>
-                    <div class="row mt-4">
-                        <div class="col-md-2">
-                            <label for="canal">Canal de contacto 4</label>
-                            <label for="canal">Facebook</label>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="cuenta">Cuenta</label>
-                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
-                        </div>
-                        <div class="col-md-2">
-                            <label for="preferencias">Preferencias</label>
-                            <select name="preferencias" id="preferencias" class="form-control">
-                                <option value="1">Sin preferencia</option>
-                                <option value="2">Canal favorito</option>
-                                <option value="3">No molestar</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2">
-                            <label for="canal" class="text-white">Guardar Canal</label>
-                            <button type="text" id="canal-facebook" class="form-control"
-                                onclick="guadarCanal(4)">Guardar
-                                canal</button>
+                        <div class="row mt-4">
+                            <div class="col-md-2">
+                                <label for="canal">Canal de contacto 4</label>
+                                <label for="canal">Facebook</label>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="cuenta">Cuenta</label>
+                                <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                            </div>
+                            <div class="col-md-2">
+                                <label for="preferencias">Preferencias</label>
+                                <select name="preferencias" id="preferencias" class="form-control">
+                                    <option value="1">Sin preferencia</option>
+                                    <option value="2">Canal favorito</option>
+                                    <option value="3">No molestar</option>
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="canal" class="text-white">Asociar Canal</label>
+                                <button type="text" id="canal-facebook" class="form-control"
+                                    onclick="guadarCanal(4)" disabled="true">Asociar
+                                    canal</button>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger">Cancelar</button>
-                    <button type="button" class="btn btn-success" onclick="crearContacto()">Guardar contacto</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Cancelar</button>                    
                 </div>
             </div>
         </div>
     </div>
     <!-- modal agregar contacto -->
 
-    <!-- modal eliminar contacto -->
-    <div class="modal fade" id="eliminarContacto" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- modal eliminar contacto masivo -->
+    <div class="modal fade" id="eliminarContactoMasivo" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
 
@@ -300,7 +302,28 @@
             </div>
         </div>
     </div>
-    <!-- modal eliminar contacto -->
+    <!-- modal eliminar contacto masivo -->
+
+    <!-- modal eliminar contacto individual -->
+    <div class="modal fade" id="eliminarContactoIndividual" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="mb-3 text-center">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcREziGsRatBq43p8iJyM4Ezqa71SAZg33UhuA&usqp=CAU"
+                            class="avatar-pic" alt="">
+                        <p class="mt-5">¿Seguro desea eliminar el contacto seleccionado?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger d-block">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal eliminar contacto individual -->
 
     <!-- modal importar contacto -->
     <div class="modal fade" id="importarContactos" tabindex="-1" role="dialog" aria-hidden="true">

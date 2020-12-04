@@ -6,7 +6,7 @@ const routerContactos = require('../components/contactos');
 const routerUsuarios = require('../components/usuarios');
 const routerCompanias = require('../components/companias');
 const routerLocalizacion = require('../components/localizacion');
-//const routerApiWelcome = require('../components/welcome');
+const routerApiWelcome = require('../components/welcome');
 
 
 class Server {
@@ -25,7 +25,7 @@ class Server {
             next();
         });
 
-        //this.app.use(`${config.apiVersion}/api-ping`, routerApiWelcome);
+        this.app.use(`${config.apiVersion}/api-ping`, routerApiWelcome);
         this.app.use(`${config.apiVersion}/usuarios`, routerUsuarios);
         this.app.use(`${config.apiVersion}/contactos`, routerContactos);
         this.app.use(`${config.apiVersion}/companias`, routerCompanias);

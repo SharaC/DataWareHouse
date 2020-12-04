@@ -25,36 +25,36 @@ function mostrarArbolRegiones() {
                     data.forEach((fila) => {
                         if (fila.Nombre_region == nombreRegion && fila.Nombre_pais == nombrePais){
                             plantilla = `<tr>
-                                            <td class="border-left"></td>
-                                            <td></td>
-                                            <td class="border-right"></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="border-right"></td>
+                                            <td class="border-left border-top-0"></td>
+                                            <td class="border-top-0"></td>
+                                            <td class="border-right border-top-0"></td>
+                                            <td class="border-top-0"></td>
+                                            <td class="border-top-0"></td>
+                                            <td class="border-right border-top-0"></td>
                                             <td id="labelEdit-ciudad${fila.id_ciudad}">${fila.Nombre_ciudad}</td>
                                             <td id="inputEdit-ciudad${fila.id_ciudad}" class="nonvisible"><input class="form-control" type="text" placeholder="${fila.Nombre_ciudad}"></td>
                                             <td id="edit-ciudad${fila.id_ciudad}"><button onclick="editarCiudad(${fila.id_ciudad})" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button></td>
                                             <td id="save-ciudad${fila.id_ciudad}" class="nonvisible"><button onclick="guardarCambiosCiudad(${fila.id_ciudad})" class="btn btn-success btn-sm"><i class="fas fa-save"></i></button></td>
-                                            <td id="del-ciudad${fila.id_ciudad}" class="border-right"><button id="del-ciudad${fila.Nombre_ciudad}" onclick="eliminarCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                            <td id="del-ciudad${fila.id_ciudad}" class="border-right"><button id="del-ciudad${fila.Nombre_ciudad}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminarCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                             <td id="cancelEdit-ciudad${fila.id_ciudad}" class="border-right nonvisible"><button id="cancel-ciudad${fila.Nombre_ciudad}" onclick="cancelarEditCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
                                         </tr>`;
                         }else if (fila.Nombre_region == nombreRegion && fila.Nombre_pais != nombrePais){
                             plantilla = `<tr>
-                                            <td class="border-left"></td>
-                                            <td></td>
-                                            <td class="border-right"></td>
+                                            <td class="border-left border-top-0"></td>
+                                            <td class="border-top-0"></td>
+                                            <td class="border-right border-top-0"></td>
                                             <td id="labelEdit-pais${fila.id_pais}">${fila.Nombre_pais}</td>
                                             <td id="inputEdit-pais${fila.id_pais}" class="nonvisible"><input class="form-control" type="text" placeholder="${fila.Nombre_pais}"></td>
                                             <td id="edit-pais${fila.id_pais}"><button onclick="editarPais(${fila.id_pais})" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button></td>
                                             <td id="save-pais${fila.id_pais}" class="nonvisible"><button onclick="guardarCambiosPais(${fila.id_pais})" class="btn btn-success btn-sm"><i class="fas fa-save"></i></button></td>
-                                            <td id="del-pais${fila.id_pais}" class="border-right"><button id="del-pais${fila.Nombre_pais}" onclick="eliminarPais(${fila.id_pais})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                            <td id="del-pais${fila.id_pais}" class="border-right"><button id="del-pais${fila.Nombre_pais}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminarPais(${fila.id_pais})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                             <td id="cancelEdit-pais${fila.id_pais}" class="border-right nonvisible"><button id="cancel-pais${fila.Nombre_pais}" onclick="cancelarEditPais(${fila.id_pais})" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
                                             
                                             <td id="labelEdit-ciudad${fila.id_ciudad}">${fila.Nombre_ciudad}</td>
                                             <td id="inputEdit-ciudad${fila.id_ciudad}" class="nonvisible"><input class="form-control" type="text" placeholder="${fila.Nombre_ciudad}"></td>
                                             <td id="edit-ciudad${fila.id_ciudad}"><button onclick="editarCiudad(${fila.id_ciudad})" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button></td>
                                             <td id="save-ciudad${fila.id_ciudad}" class="nonvisible"><button onclick="guardarCambiosCiudad(${fila.id_ciudad})" class="btn btn-success btn-sm"><i class="fas fa-save"></i></button></td>
-                                            <td id="del-ciudad${fila.id_ciudad}" class="border-right"><button id="del-ciudad${fila.Nombre_ciudad}" onclick="eliminarCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                            <td id="del-ciudad${fila.id_ciudad}" class="border-right"><button id="del-ciudad${fila.Nombre_ciudad}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminarCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                             <td id="cancelEdit-ciudad${fila.id_ciudad}" class="border-right nonvisible"><button id="cancel-ciudad${fila.Nombre_ciudad}" onclick="cancelarEditCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
                                         </tr>`;
                             nombrePais = fila.Nombre_pais;
@@ -64,21 +64,21 @@ function mostrarArbolRegiones() {
                                             <td id="inputEdit-region${fila.id_region}" class="nonvisible"><input class="form-control" type="text" placeholder="${fila.Nombre_region}"></td>
                                             <td id="edit-region${fila.id_region}"><button onclick="editarRegion(${fila.id_region})" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button></td>
                                             <td id="save-region${fila.id_region}" class="nonvisible"><button onclick="guardarCambiosRegion(${fila.id_region})" class="btn btn-success btn-sm"><i class="fas fa-save"></i></button></td>
-                                            <td id="del-region${fila.id_region}" class="border-right"><button id="del-region${fila.Nombre_region}" onclick="eliminarRegion(${fila.id_region})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                            <td id="del-region${fila.id_region}" class="border-right"><button id="del-region${fila.Nombre_region}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminarRegion(${fila.id_region})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                             <td id="cancelEdit-region${fila.id_region}" class="border-right nonvisible"><button id="cancel-region${fila.Nombre_region}" onclick="cancelarEditRegion(${fila.id_region})" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
 
                                             <td id="labelEdit-pais${fila.id_pais}">${fila.Nombre_pais}</td>
                                             <td id="inputEdit-pais${fila.id_pais}" class="nonvisible"><input class="form-control" type="text" placeholder="${fila.Nombre_pais}"></td>
                                             <td id="edit-pais${fila.id_pais}"><button onclick="editarPais(${fila.id_pais})" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button></td>
                                             <td id="save-pais${fila.id_pais}" class="nonvisible"><button onclick="guardarCambiosPais(${fila.id_pais})" class="btn btn-success btn-sm"><i class="fas fa-save"></i></button></td>
-                                            <td id="del-pais${fila.id_pais}" class="border-right"><button id="del-pais${fila.Nombre_pais}" onclick="eliminarPais(${fila.id_pais})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                            <td id="del-pais${fila.id_pais}" class="border-right"><button id="del-pais${fila.Nombre_pais}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminarPais(${fila.id_pais})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                             <td id="cancelEdit-pais${fila.id_pais}" class="border-right nonvisible"><button id="cancel-pais${fila.Nombre_pais}" onclick="cancelarEditPais(${fila.id_pais})" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
                                             
                                             <td id="labelEdit-ciudad${fila.id_ciudad}">${fila.Nombre_ciudad}</td>
                                             <td id="inputEdit-ciudad${fila.id_ciudad}" class="nonvisible"><input class="form-control" type="text" placeholder="${fila.Nombre_ciudad}"></td>
                                             <td id="edit-ciudad${fila.id_ciudad}"><button onclick="editarCiudad(${fila.id_ciudad})" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i></button></td>
                                             <td id="save-ciudad${fila.id_ciudad}" class="nonvisible"><button onclick="guardarCambiosCiudad(${fila.id_ciudad})" class="btn btn-success btn-sm"><i class="fas fa-save"></i></button></td>
-                                            <td id="del-ciudad${fila.id_ciudad}" class="border-right"><button id="del-ciudad${fila.Nombre_ciudad}" onclick="eliminarCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
+                                            <td id="del-ciudad${fila.id_ciudad}" class="border-right"><button id="del-ciudad${fila.Nombre_ciudad}" data-toggle="modal" data-target="#modalEliminar" onclick="eliminarCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></button></td>
                                             <td id="cancelEdit-ciudad${fila.id_ciudad}" class="border-right nonvisible"><button id="cancel-ciudad${fila.Nombre_ciudad}" onclick="cancelarEditCiudad(${fila.id_ciudad})" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button></td>
                                         </tr>`;
                             nombreRegion = fila.Nombre_region;
@@ -86,6 +86,10 @@ function mostrarArbolRegiones() {
                         }
                         
                         rows.insertAdjacentHTML('beforeend', plantilla);
+                        let botonesVacios = document.querySelectorAll('#edit-ciudad,#edit-region,#edit-pais,#del-ciudad,#del-region,#del-pais');
+                        botonesVacios.forEach(botonVacio => {
+                            botonVacio.innerHTML=""
+                        });
                     });
                 });
             }).catch(error => {
@@ -353,7 +357,7 @@ function eliminarCiudad(id_ciudad){
     let ruta_endpoint = `ciudad/${id_ciudad}/confirm-delete`;
     plantilla_modal = `<p id="modal eliminar">Tenga en cuenta que al eliminar esta ciudad se van a borrar todas las compañias y/o contactos que pertenezcan a esta ciudad. ¿Desea continuar?</p>
                     <button id="btnAceptarEliminar" class="btn btn-success" onclick="eliminarElemento('${ruta_endpoint}')">ACEPTAR</button>
-                    <button id="btnCancelarEliminar" class="btn btn-danger" onclick="cerrarEliminarElemento()">CANCELAR</button>`;
+                    <button id="btnCancelarEliminar" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>`;
     modalConfirmaEliminar.innerHTML = plantilla_modal;
 }
 
@@ -361,7 +365,7 @@ function eliminarRegion(id_region){
     let ruta_endpoint = `region/${id_region}/confirm-delete`;
     plantilla_modal = `<p id="modal eliminar">Tenga en cuenta que al eliminar esta región se van a borrar todos los países, ciudades, compañias y/o contactos que pertenezcan a esta region. ¿Desea continuar?</p>
                     <button id="btnAceptarEliminar" class="btn btn-success" onclick="eliminarElemento('${ruta_endpoint}')">ACEPTAR</button>
-                    <button id="btnCancelarEliminar" class="btn btn-danger" onclick="cerrarEliminarElemento()">CANCELAR</button>`;
+                    <button id="btnCancelarEliminar" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>`;
     modalConfirmaEliminar.innerHTML = plantilla_modal;
 }
 
@@ -369,16 +373,11 @@ function eliminarPais(id_pais){
     let ruta_endpoint = `pais/${id_pais}/confirm-delete`;
     plantilla_modal = `<p id="modal eliminar">Tenga en cuenta que al eliminar este país se van a borrar todos las ciudades, compañias y/o contactos que pertenezcan a este país. ¿Desea continuar?</p>
                     <button id="btnAceptarEliminar" class="btn btn-success" onclick="eliminarElemento('${ruta_endpoint}')">ACEPTAR</button>
-                    <button id="btnCancelarEliminar" class="btn btn-danger" onclick="cerrarEliminarElemento()">CANCELAR</button>`;
+                    <button id="btnCancelarEliminar" class="btn btn-danger" data-dismiss="modal">CANCELAR</button>`;
     modalConfirmaEliminar.innerHTML = plantilla_modal;
 }
 
-function cerrarEliminarElemento(){
-    modalConfirmaEliminar.innerHTML = '';
-}
-
 function eliminarElemento(ruta_eliminar){
-    console.log("holi");
     fetch(`http://127.0.0.1:3030/v1/localizacion/${ruta_eliminar}`, {
         method: 'DELETE',
         headers: { "Authorization": "Bearer " + jwt,
@@ -387,10 +386,8 @@ function eliminarElemento(ruta_eliminar){
         res.json().then(data => {
             console.log(data);
         });
-        cerrarEliminarElemento();
         location.reload();
     }).catch(error => {
         console.log(error);
     });
 }
-

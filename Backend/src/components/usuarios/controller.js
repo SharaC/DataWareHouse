@@ -40,7 +40,52 @@ const registrarUsuario = (req, res) => {
     });
 };
 
+const listarUsuarios = (req, res) => {
+    conexion.query(`SELECT USU.id AS id_usuario, USU.username AS Usuario, USU.nombre_completo AS Nombre, USU.email AS Email, PER.perfil AS Rol, USU.id_perfil 
+                    FROM usuarios USU
+                    INNER JOIN perfiles PER ON PER.id = USU.id_perfil;`, 
+        {type:conexion.QueryTypes.SELECT
+    }).then((result)=> {
+        res.status(200).json(result);
+    }).catch(err => {
+        console.log(err);
+        res.status(500).json(err);
+    })
+};
+
+const actualizarUsuario = (req, res) => {
+    let {id, username,nombre_completo,email,id_perfil} = req.body;
+    conexion.query(`UPDATE usuarios SET username=?, nombre_completo=?, email=?, id_perfil=? WHERE id=?;`,
+    {
+        replacements: [username,nombre_completo,email,id_perfil, id],
+        type: conexion.QueryTypes.UPDATE
+    }).then(result => {
+        result[1] === 0 ? res.status(400).json("los parametros enviados para actualizar no son correctos, ningún usuario se actualizó") : 
+        res.status(200).json("El usuario con id: "+id+" fue actualizado correctamente");
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+}
+
+const eliminarUsuario = (req, res) => {
+    let id = req.params.id;
+    conexion.query(`DELETE from usuarios WHERE id=${id};`,
+        {
+            type: conexion.QueryTypes.DELETE
+        }).then(result => {
+            result[1] === 0 ? res.status(400).json("los parametros enviados para eliminar no son correctos, ningún usuario se eliminó") :
+            res.status(200).json("El usuario con id: "+id+" fue ELIMINADO correctamente");
+        }).catch(err => {
+            res.status(500).json(err);
+            
+        });
+    
+}
+
 module.exports = {
     autenticarUsuario,
-    registrarUsuario
+    registrarUsuario,
+    listarUsuarios,
+    actualizarUsuario,
+    eliminarUsuario,
 }

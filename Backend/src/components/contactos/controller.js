@@ -1,7 +1,11 @@
 const conexion = require('../../startup/conexion');
 
 const listarContactos = (req, res) => {
-    conexion.query(`SELECT * FROM contactos;`,
+    conexion.query(`SELECT CON.id, CON.nombre_completo AS Nombre, CON.cargo AS Cargo, CON.email AS Email, COMP.nombre AS Compania, CON.direccion AS Direccion, CON.interes AS Interes, CIU.nombre AS Ciudad, PAI.nombre AS Pais 
+                    FROM contactos CON
+                    INNER JOIN ciudades CIU ON CIU.id = CON.id_ciudad
+                    INNER JOIN paises PAI ON PAI.id = CIU.id_paises
+                    INNER JOIN companias COMP ON COMP.id = CON.id_compania;`,
     {
         type: conexion.QueryTypes.SELECT
     }).then(result => {

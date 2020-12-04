@@ -3,7 +3,7 @@ const { validarToken } = require('../../middlewares/token/jwt');
 const { 
     listarTodo, listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
     listarPaises, listarPaisID, listarPaisPorRegion, crearPais, editarPais, eliminarPais,
-    listarCiudades, listarCiudadID, crearCiudad, editarCiudad, eliminarCiudad
+    listarCiudades, listarCiudadID, listarCiudadPorPais, crearCiudad, editarCiudad, eliminarCiudad
 } = require('./controller');
 
 router.get('/todo-ciudades', validarToken, listarTodo);
@@ -23,6 +23,7 @@ router.delete('/pais/:id/confirm-delete', validarToken, eliminarPais);
 
 router.get('/ciudades', validarToken, listarCiudades);
 router.get('/ciudades/:id', validarToken, listarCiudadID);
+router.get('/ciudad-pais/:id', validarToken, listarCiudadPorPais);
 router.post('/nueva-ciudad', validarToken, crearCiudad);
 router.put('/ciudad', validarToken, editarCiudad);
 router.delete('/ciudad/:id/confirm-delete', validarToken, eliminarCiudad);

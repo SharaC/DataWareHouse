@@ -1,12 +1,12 @@
 const conexion = require('../../startup/conexion');
 
 const listarTodo = (req, res) => {
-    conexion.query(`Select CIU.id AS id_ciudad, CIU.nombre AS Nombre_ciudad, 
-    PAI.id AS id_pais, PAI.nombre AS Nombre_pais, 
-    REG.id AS id_region, REG.nombre AS Nombre_region 
+    conexion.query(`Select ifnull(CIU.id,'') AS id_ciudad, ifnull(CIU.nombre,'(sin ciudades)') AS Nombre_ciudad,
+    ifnull(PAI.id,'') AS id_pais, ifnull(PAI.nombre,'(sin paises)') AS Nombre_pais,
+    REG.id AS id_region, REG.nombre AS Nombre_region
     FROM ciudades CIU
-    INNER JOIN paises PAI ON PAI.id = CIU.id_paises
-    INNER JOIN regiones REG ON REG.id = PAI.id_region
+    right JOIN paises PAI ON PAI.id = CIU.id_paises
+    right JOIN regiones REG ON REG.id = PAI.id_region
     ORDER BY REG.nombre, PAI.nombre , CIU.nombre;`,
     {
         type: conexion.QueryTypes.SELECT
@@ -100,7 +100,7 @@ const listarPaises = (req, res) => {
 
 const listarPaisID = (req, res) => {
     let id = req.params.id;
-    conexion.query(`SELECT * FROM paises WHERE id= ?`,
+    conexion.query(`SELECT * FROM paises WHERE id= ?;`,
     {
         replacements: [id],
         type: conexion.QueryTypes.SELECT
@@ -118,7 +118,7 @@ const listarPaisPorRegion = (req, res) => {
         replacements: [id],
         type: conexion.QueryTypes.SELECT
     }).then(result => {
-        result.length === 0 ? res.status(404).json("no se encontró el producto solicitado") : res.status(200).json(result);
+        result.length === 0 ? res.status(404).json("no se encontró la ciudad solicitada") : res.status(200).json(result);
     }).catch(err => {
         res.status(500).json(err);
     });
@@ -194,6 +194,19 @@ const listarCiudadID = (req, res) => {
     });
 }
 
+const listarCiudadPorPais = (req, res) => {
+    let id = req.params.id;
+    conexion.query(`SELECT * FROM ciudades WHERE id_paises= ?;`,
+    {
+        replacements: [id],
+        type: conexion.QueryTypes.SELECT
+    }).then(result => {
+        result.length === 0 ? res.status(404).json("no se encontró la ciudad solicitada") : res.status(200).json(result);
+    }).catch(err => {
+        res.status(500).json(err);
+    });
+}
+
 const crearCiudad = (req, res) => {
     let {nombre,id_paises} = req.body;
     conexion.query("INSERT INTO `ciudades` (`nombre`,`id_paises`) VALUES (?,?);",
@@ -243,5 +256,5 @@ const eliminarCiudad = (req, res) => {
 module.exports = {
     listarTodo, listarRegiones, listarRegionID, crearRegion, editarRegion, eliminarRegion,
     listarPaises, listarPaisID, listarPaisPorRegion, crearPais, editarPais, eliminarPais,
-    listarCiudades, listarCiudadID, crearCiudad, editarCiudad, eliminarCiudad
+    listarCiudades, listarCiudadID, listarCiudadPorPais, crearCiudad, editarCiudad, eliminarCiudad
 }

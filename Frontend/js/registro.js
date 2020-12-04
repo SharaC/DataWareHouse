@@ -20,7 +20,7 @@ function registrarUsuario(){
                 response.json().then((data)=>{
                     console.log(data);
                 });        
-                location.href = "../Frontend/contactos.html";
+                location.href = "../html/usuarios.html";
             }
             else{
                 console.log(response.json);

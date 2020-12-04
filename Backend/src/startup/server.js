@@ -2,9 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
-//const routerContactos = require('../components/contactos');
+const routerContactos = require('../components/contactos');
 const routerUsuarios = require('../components/usuarios');
-//const routerCompanias = require('../components/companias');
+const routerCompanias = require('../components/companias');
 const routerLocalizacion = require('../components/localizacion');
 //const routerApiWelcome = require('../components/welcome');
 
@@ -27,8 +27,8 @@ class Server {
 
         //this.app.use(`${config.apiVersion}/api-ping`, routerApiWelcome);
         this.app.use(`${config.apiVersion}/usuarios`, routerUsuarios);
-        //this.app.use(`${config.apiVersion}/contactos`, routerContactos);
-        //this.app.use(`${config.apiVersion}/companias`, routerCompanias);
+        this.app.use(`${config.apiVersion}/contactos`, routerContactos);
+        this.app.use(`${config.apiVersion}/companias`, routerCompanias);
         this.app.use(`${config.apiVersion}/localizacion`, routerLocalizacion);
     }
 

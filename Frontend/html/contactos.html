@@ -65,8 +65,8 @@
                         <button href="" class="btn btn-outline-dark" data-toggle="modal"
                             data-target="#importarContactos"><i class="fas fa-upload"></i></button>
                         <button href="" class="btn btn-outline-dark ml-1">Exportar contactos</button>
-                        <button href="" class="btn btn-dark ml-1" data-toggle="modal"
-                            data-target="#agregarContacto">Agregar contacto</button>
+                        <button href="" class="btn btn-dark ml-1" data-toggle="modal" data-target="#agregarContacto"
+                            onclick="listarCompanias();cargarRegiones();">Agregar contacto</button>
                     </div>
                     <!-- </div> -->
                 </div>
@@ -84,13 +84,12 @@
                                     <th>País/Región <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
                                     <th>Compañía <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
                                     <th>Cargo <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
-                                    <th>Canal preferido</th>
                                     <th>Interés <a href="" class="text-white"><i class="fas fa-sort"></i></a></th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr>
+                            <tbody id="rows">
+                                <!-- <tr>
                                     <td class="align-middle"><input type="checkbox" name="" id=""></td>
                                     <td><img src="https://image.freepik.com/vector-gratis/ilustracion-vector-cara-mujer-tipo-afroamericano-pelo-rizado-retrato-hermoso-muchacha-sonrisa_156811-221.jpg"
                                             alt="..." class="img-table"> Camila Soledad Pantó</td>
@@ -163,7 +162,7 @@
                                         </div>
                                     </td>
                                     <td class="text-center"><a href="" class="text-dark">...</a></td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -183,12 +182,12 @@
                         </div>
                         <div class="row border p-4 ml-4 mr-4 bg-white rounded">
                             <div class="col-md-2">
-                                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                                    class="rounded-circle z-depth-1-half avatar-pic" alt="example placeholder avatar">
-                                <input type="file" id="myfile" style="display: none;""/>
-                                </div>
-                              
-                                <div class=" col-md-2">
+                                <img src="../assets/contact.png" class="rounded-circle z-depth-1-half avatar-pic"
+                                    alt="example placeholder avatar">
+                                <input type="file" id="myfile" style="display: none;">
+                            </div>
+
+                            <div class=" col-md-2">
                                 <label for="nombreContacto">Nombre *</label>
                                 <input type="text" name="nombre" id="nombreContacto" class="form-control">
                             </div>
@@ -206,32 +205,34 @@
                             </div>
                             <div class="col-md-2">
                                 <label for="companiaContacto">Compañía *</label>
-                                <input type="text" name="compania" id="companiaContacto" class="form-control">
+                                <select name="compania" id="companiaContacto" class="form-control">
+                                    <option value="0" disabled selected>Seleccione una compañía</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-                    <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button> -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                     <div class="row bg-white">
                         <div class="col-md-2">
                             <label for="region">Región *</label>
-                            <select name="region" id="region" class="form-control">
-                                <option value="camilo">Camilo</option>
+                            <select name="region" id="region" class="form-control" onchange="cargarPaises()">
+                                <option value="0" disabled selected>Seleccione una región</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label for="pais">País *</label>
-                            <select name="pais" id="pais" class="form-control">
-                                <option value="camilo">País</option>
+                            <select name="pais" id="pais" class="form-control" onchange="cargarCiudades()">
+                                <option value="0" disabled selected>Seleccione un país</option>
                             </select>
                         </div>
                         <div class="col-md-2">
                             <label for="ciudad">Ciudad *</label>
                             <select name="ciudad" id="ciudad" class="form-control">
-                                <option value="camilo">Ciudad</option>
+                                <option value="0" disabled selected>Seleccione una ciudad</option>
                             </select>
                         </div>
                         <div class="col-md-2">
@@ -251,31 +252,103 @@
                     </div>
                     <div class="row mt-4">
                         <div class="col-md-2">
-                            <label for="canal">Canal de contacto</label>
-                            <select name="canal" id="canal" class="form-control">
-                                <option value="camilo">Camilo</option>
-                            </select>
+                            <label for="canal">Canal de contacto 1</label>
+                            <label for="canal">WhatsApp</label>
                         </div>
                         <div class="col-md-2">
-                            <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control">
+                            <label for="cuenta">Cuenta</label>
+                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
                         </div>
                         <div class="col-md-2">
                             <label for="preferencias">Preferencias</label>
                             <select name="preferencias" id="preferencias" class="form-control">
-                                <option value="camilo">preferencias</option>
+                                <option value="1">Sin preferencia</option>
+                                <option value="2">Canal favorito</option>
+                                <option value="3">No molestar</option>
                             </select>
                         </div>
                         <div class="col-md-2">
-                            <label class="text-white">Agregar canal</label>
-                            <button type="text" id="" class="form-control"><i class="fas fa-plus"></i> Agregar
+                            <label for="canal" class="text-white">Guardar Canal</label>
+                            <button type="text" id="canal-whatsapp" class="form-control"
+                                onclick="guadarCanal(1)">Guardar
+                                canal</button>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            <label for="canal">Canal de contacto 2</label>
+                            <label for="canal">Teléfono</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cuenta">Cuenta</label>
+                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="preferencias">Preferencias</label>
+                            <select name="preferencias" id="preferencias" class="form-control">
+                                <option value="1">Sin preferencia</option>
+                                <option value="2">Canal favorito</option>
+                                <option value="3">No molestar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="canal" class="text-white">Guardar Canal</label>
+                            <button type="text" id="canal-telefono" class="form-control" onclick="guadarCanal(2)">
+                                Guardar
+                                canal</button>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            <label for="canal">Canal de contacto 3</label>
+                            <label for="canal">e-mail</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cuenta">Cuenta</label>
+                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="preferencias">Preferencias</label>
+                            <select name="preferencias" id="preferencias" class="form-control">
+                                <option value="1">Sin preferencia</option>
+                                <option value="2">Canal favorito</option>
+                                <option value="3">No molestar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="canal" class="text-white">Guardar Canal</label>
+                            <button type="text" id="canal-email" class="form-control" onclick="guadarCanal(3)">Guardar
+                                canal</button>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-md-2">
+                            <label for="canal">Canal de contacto 4</label>
+                            <label for="canal">Facebook</label>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="cuenta">Cuenta</label>
+                            <input type="texto" name="cuenta" id="cuenta" class="form-control">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="preferencias">Preferencias</label>
+                            <select name="preferencias" id="preferencias" class="form-control">
+                                <option value="1">Sin preferencia</option>
+                                <option value="2">Canal favorito</option>
+                                <option value="3">No molestar</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="canal" class="text-white">Guardar Canal</label>
+                            <button type="text" id="canal-facebook" class="form-control"
+                                onclick="guadarCanal(4)">Guardar
                                 canal</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-danger">Eliminar contacto</button>
-                    <button type="button" class="btn btn-success">Guardar contacto</button>
+                    <button type="button" class="btn btn-outline-danger">Cancelar</button>
+                    <button type="button" class="btn btn-success" onclick="crearContacto()">Guardar contacto</button>
                 </div>
             </div>
         </div>
@@ -329,6 +402,7 @@
     </div>
     <!-- modal importar contacto -->
 
+    <script src="../js/contactos.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
     </script>

@@ -5,7 +5,7 @@ Aplicación Web para gestión de contactos de interés de una compañía
 ## Requisitos:
 
 1. Instalar motor de **MySQL**
-2. En su motor de base de datos, ejecute el script de creación e inicialización de la base de datos que se encuentra en el archivo: **datawarehouse.sql**
+2. En su motor de base de datos, ejecute el script de creación e inicialización de la base de datos que se encuentra en el archivo: **initdb_datawarehouse.sql**
    **NOTA**:
    **1** Al final de este archivo se insertan algunos datos de prueba para poblar la base de datos inicialemte, por lo que antes de ejecutar el script, debería revisar y realizar modificaciones en algunas o todas las entradas, entre ellas el **usuario con rol de administrador** y su contraseña en la tabla de usuarios.
    **2** Se han insertado solo algunos países y ciudades en sus respectivas tablas, y por esto tenga muy en cuenta que pueden existir algunas regiones **SIN PAISES y SIN CIUDADES** asociados o paises **SIN CIUDADES** asociadas, por lo que cuando pruebe la aplicación y necesite ubucar ciudades o paises que aún no se han agregado se encontrará que no es posible seleccionar hasta que primero las cree desde la sección **Región/Ciudad**.

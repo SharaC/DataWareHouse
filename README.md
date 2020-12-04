@@ -33,7 +33,7 @@ En el directorio **./src/startup** se encuentra el archivo de parámetros a conf
 **Frontend:**  
 Levantar un servidor web local para acceder a los recursos del Frontend, se recomienda utilizar la extensión de Live Server en el editor Visual Studio Code. El archivo principal que debe abrir en el navegador es ./Frontend/html/login.html . Si estás usando el liveserver por el puerto 5500, entonces ingresa en el navegador: [http://127.0.0.1:5500/Frontend/html/login.html](http://127.0.0.1:5500/Frontend/html/login.html) y llegaras al login de la aplicación.
 
-**Backend:**
+**Backend:** 
 Ubicado en la raíz de la carpeta Backend de este proyecto ejecute el comando: `node app.js` para iniciar la aplicación. Para probar que se inició exitosamente, visite en el navegador de preferencia, de acuerdo a sus parámetros: `http://HOST:appPort/v1/api-ping` (por ejemplo [http://localhost:3030/v1/api-ping](http://localhost:3030/v1/api-ping) ) y verifique que la respuesta recibida sea: **Datawarehouse Sharac: it works fine ;)"**
 
 ## [](https://github.com/SharaC/DataWareHouse#uso-de-la-aplicaci%C3%B3n)Uso de la aplicación:
@@ -45,4 +45,4 @@ Lo primero que debes hacer es autenticarte con uno de los 2 usuarios que se deja
 
 O bien, puedes insertar directamente tus propios usuarios iniciales en la base de datos en la tabla de usuarios. (en el script se incluyen los INSERT de ejemplo, con los que se registraron "admin" y "sharac").
 
-Una vez logueado, debería ser redirigido a la sección **Compañías** y ya puede comenzar a navegar entre las diferentes vistas.
+Una vez logueado, debería ser redirigido a la sección **Contactos** y ya puede comenzar a navegar entre las diferentes vistas.
